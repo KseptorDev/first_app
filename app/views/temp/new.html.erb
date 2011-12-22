@@ -1,0 +1,13 @@
+<%= form_for @temp, :url => show_path do |f| %>
+    <div class="field">
+      <%= f.label :link %><br />
+      <%= f.text_field :link %>
+    </div>
+    <div class="field">
+      <%= f.label :tags %><br />
+      <%= f.text_field :tags %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Add Link" %>
+    </div>
+<% end %>
