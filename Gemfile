@@ -7,7 +7,6 @@ gem 'fastimage', '1.2.9'
 gem 'therubyracer'
 gem 'rmagick', '2.13.1'
 gem 'image_downloader', '0.2.4'
-gem 'nokogiri', '1.5.0'
 # gem 'rest-open-uri'
 group :development do
 gem 'annotate', '2.4.0'
