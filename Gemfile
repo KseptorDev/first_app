@@ -2,6 +2,15 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
 gem 'mysql', '2.8.1'
+gem 'image_size', '1.0.3'
+gem 'fastimage', '1.2.9'
+gem 'therubyracer'
+gem 'rmagick', '2.13.1'
+gem 'image_downloader', '0.2.4'
+# gem 'rest-open-uri'
+group :development do
+gem 'annotate', '2.4.0'
+end
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
