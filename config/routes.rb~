@@ -1,11 +1,7 @@
 FirstApp::Application.routes.draw do
-  get "temp/new"
-
-  get "temp/show"
-
-  get "tegs/show"
-
-  get "both/show"
+  root :to => 'temp#new'
+  get "show" => "temp#show"
+  resources :temp, :tegs, :both
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

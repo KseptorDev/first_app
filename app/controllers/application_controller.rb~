@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include BothHelper
   include TegsHelper
   include LinksHelper
-  include TempoHelper
+  include TempHelper
   
 
 end
