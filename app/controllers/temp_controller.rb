@@ -69,7 +69,7 @@ class TempController < ApplicationController
 
   def resize_image(params)
      width, height = params[2], params[3]
-     img =  file.read("images/original/#{@original_image_name}").first
+     img =  Magick::Image.read("images/original/#{@original_image_name}").first
      thumb = img.resize(width, height)
      thumb.write("images/#{params[1]}/#{@tempo.id}_#{params[1]}.#{params[0]}")
   end
