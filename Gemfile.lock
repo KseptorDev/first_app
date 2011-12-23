@@ -128,7 +128,6 @@ DEPENDENCIES
   image_size (= 1.0.3)
   jquery-rails
   mysql (= 2.8.1)
-  nokogiri (= 1.5.0)
   rails (= 3.1.0)
   rmagick (= 2.13.1)
   sass-rails (~> 3.1.0)
