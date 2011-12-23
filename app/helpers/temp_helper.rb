@@ -12,7 +12,7 @@ module TempHelper
     @url 		 = 	@tempo.link
     @uri		 = 	URI.parse(@url)
     @response		 = 	Net::HTTP.start(@uri.host, @uri.port) { |http| http.request_head(@uri.path) }  
-    @original_image_name =	Digest::MD5.hexdigest(image_name())
+    @original_image_name = 	Digest::MD5.hexdigest(image_name())
 
     if url_file_extension != false && get_file_size
       @imageID = Temp.first.id

@@ -1,2 +1,1 @@
-<h1>Temp#show</h1>
-<p>Find me in app/views/temp/show.html.erb</p>
+<%= create_images %>
