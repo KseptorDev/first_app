@@ -40,7 +40,7 @@ class TempController < ApplicationController
       Net::HTTP.start(@uri.host, @uri.port) do |http|
 	  if http.head(@uri.request_uri).code == "200"
 	  resp = http.get(@url)
-	  open("images/original/test", "wb") do |file|
+	  open("images/original/#{@original_image_name}", "wb") do |file|
 	      file.write(resp.body)
 	  end
 	end

@@ -6,7 +6,7 @@
 development:
   adapter: mysql
   encoding: utf8
-  database: temp
+  database: temps
   pool: 5
   username: root
   password: q1w2e3r4

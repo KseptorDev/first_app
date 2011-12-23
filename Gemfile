@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
-gem 'mysql', '2.8.1'
+gem 'mysql2', '0.3.11'
 gem 'image_size', '1.0.3'
 gem 'fastimage', '1.2.9'
 gem 'therubyracer'
