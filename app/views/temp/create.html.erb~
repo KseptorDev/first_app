@@ -1,5 +1,4 @@
 <h2> :) You have added a link! </h2>
-<%= @temp.link %>
 <table>
   <tr>
     <th>ID</th>
@@ -20,4 +19,4 @@
 
 <br />
 
-<%= link_to 'New Test', root_path %>
+<%= link_to 'Add new link', root_path %>

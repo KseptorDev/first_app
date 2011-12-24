@@ -1,1 +1,4 @@
-<%= create_images %>
+<h2> <%= @output %> </h2>
+The link: <%= @temp.link %>
+<%= link_to 'Add new link', root_path %>
+<%= link_to 'Show all links', index_path %>

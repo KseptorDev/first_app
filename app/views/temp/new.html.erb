@@ -1,4 +1,4 @@
-<%= form_for @temp, :url => create_path do |f| %>
+<%= form_for @temp, :url => show_path do |f| %>
     <div class="field">
       <%= f.label :link %><br />
       <%= f.text_field :link %>
@@ -10,4 +10,5 @@
     <div class="actions">
       <%= f.submit "Add Link" %>
     </div>
-<% end %>	
+<% end %></br>
+<%= link_to 'Show all links', index_path %>

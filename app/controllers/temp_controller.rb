@@ -4,17 +4,20 @@ class TempController < ApplicationController
     @temp = Temp.new
   end
   
-  def create   
-    @temp = Temp.new(params[:temp])
-    if Temp.find_by_link(@temp.link).nil?  
-      @temp.update_attributes( :image_name => Digest::MD5.hexdigest(image_name(@temp.link)))
-      @temp.save
-    end
+  def index
     @req = Temp.all
   end
   
   def show
-    create_images 
+   @temp = Temp.new(params[:temp])
+   @output = "test"
+    if Temp.find_by_link(@temp.link).nil?
+      @temp.update_attributes( :image_name => Digest::MD5.hexdigest(image_name(@temp.link)))
+      @output = ":) You have added a new link! :)"
+      @temp.save 
+    else
+      @output = " ;) This link already exist!"
+    end
   end
   
   def url_file_extension
@@ -90,4 +93,3 @@ class TempController < ApplicationController
     return url.last i-1
   end          
 end
-
