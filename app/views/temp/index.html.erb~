@@ -1,0 +1,21 @@
+
+<% if @boo then %>
+  <h2> :) You have added a link! </h2>
+  The link: <%= @temp.link %>
+<% end %>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Link</th>
+    <th>Tags</th>
+  </tr>
+<% @req.each do |temp| %>
+  <tr>
+    <td><%= temp.id %></td>
+    <td><%= temp.link %></td>
+    <td><%= temp.tags %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+<%= link_to 'Add new link', root_path %>	
