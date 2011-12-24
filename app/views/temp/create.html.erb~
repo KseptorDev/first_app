@@ -1,0 +1,23 @@
+<h2> :) You have added a link! </h2>
+<%= @temp.link %>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Link</th>
+    <th>Tags</th>
+    <th>Image Name</th>
+  </tr>
+
+<% @req.each do |temp| %>
+  <tr>
+    <td><%= temp.id %></td>
+    <td><%= temp.link %></td>
+    <td><%= temp.tags %></td>
+    <td><%= temp.image_name %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Test', root_path %>
