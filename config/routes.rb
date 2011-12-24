@@ -1,6 +1,7 @@
 FirstApp::Application.routes.draw do
   root :to => 'temp#new'
   get "show" => "temp#show"
+  post "create" => "temp#create"
   resources :temp, :tegs, :both
 
   # The priority is based upon order of creation:

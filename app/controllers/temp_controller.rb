@@ -4,11 +4,13 @@ class TempController < ApplicationController
     @temp = Temp.new
   end
   
-  def create
-    @req = Temp.new(:link => @temp["link"], :tags => @temp["tags"], :image_name => "#{@original_image_name}")
-    if Temp.find_by_link(@temp["link"]).nil?
-      @req.save
+  def create   
+    @temp = Temp.new(params[:temp])
+    if Temp.find_by_link(@temp.link).nil?  
+      @temp.update_attributes( :image_name => Digest::MD5.hexdigest(image_name(@temp.link)))
+      @temp.save
     end
+    @req = Temp.all
   end
   
   def show
@@ -16,12 +18,11 @@ class TempController < ApplicationController
   end
   
   def url_file_extension
-     if  @response['content-type'].match(/image/)
+     if  @response["content-type"].match(/image/)
        return true
      end
        return false
   end 
-   
 #   def get_file_type(str) # cut last 4 char and check it
 #     last = ""
 #     i = 1
@@ -81,12 +82,12 @@ class TempController < ApplicationController
      thumb.write("images/#{params[1]}/#{@tempo.id}_#{params[1]}.#{params[0]}")
   end
   
-  def image_name()
+  def image_name(url)
     i = 1
-    until ((@url.last i)["/"] == "/") do
+    until ((url.last i)["/"] == "/") do
       i +=1
     end
-    return @url.last i-1
+    return url.last i-1
   end          
 end
 
