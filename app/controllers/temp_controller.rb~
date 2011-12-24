@@ -2,6 +2,14 @@ class TempController < ApplicationController
   
   def new
     @temp = Temp.new
+    add_link_and_tags
+  end
+  
+  def create
+    @req = Temp.new(:link => @temp["link"], :tags => @temp["tags"], :image_name => "#{@original_image_name}")
+    if Temp.find_by_link(@temp["link"]).nil?
+      @req.save
+    end
   end
   
   def show
@@ -69,11 +77,9 @@ class TempController < ApplicationController
 
   def resize_image(params)
      width, height = params[2], params[3]
-     File.open("images/original/#{@original_image_name}") do |img|
-	img.resize(width, height) do |file|
-	  file.save( "images/#{params[1]}/#{@tempo.id}_#{params[1]}.#{params[0]}" )
-	end
-     end
+     img =  Magick::Image.read("images/original/#{@original_image_name}").first
+     thumb = img.resize(width, height)
+     thumb.write("images/#{params[1]}/#{@tempo.id}_#{params[1]}.#{params[0]}")
   end
   
   def image_name()

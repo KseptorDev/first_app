@@ -4,6 +4,13 @@ class TempController < ApplicationController
     @temp = Temp.new
   end
   
+  def create
+    @req = Temp.new(:link => @temp["link"], :tags => @temp["tags"], :image_name => "#{@original_image_name}")
+    if Temp.find_by_link(@temp["link"]).nil?
+      @req.save
+    end
+  end
+  
   def show
     create_images 
   end
