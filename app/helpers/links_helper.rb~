@@ -1,0 +1,10 @@
+module LinksHelper
+  
+  def add_link_return_ID(link)
+    if Link.find_by_link(link).nil?
+      Link.new(:link => link).save
+    end
+    return Link.find_by_link(link).id
+  end
+  
+end

@@ -1,2 +1,11 @@
-<h1>Both#show</h1>
-<p>Find me in app/views/both/show.html.erb</p>
+Output </br>
+<% i = 0 %>
+<% while i < @tags.count do %>
+  The Links ID for: <b>"<%= @tags[i]%>"</b> are: <br/>
+  <% j = 0 %>
+  <% while j < @linksID[i].count %>
+    The URL are: <%= child_array(@linksID[i][j]).as_json %><br/>
+    <% j += 1 %>
+  <%end%>
+  <% i += 1 %>
+<% end %>

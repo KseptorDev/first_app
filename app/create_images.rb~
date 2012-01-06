@@ -1,0 +1,8 @@
+class Create_Images < ActiveRecord::Base
+    include TempHelper
+
+ hello_test
+end
+
+ #/bin/bash -l -c 'cd /home/home/rails_app/first_app && script/rails runner '\''app/create_images.rb'\'''
+

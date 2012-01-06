@@ -1,0 +1,11 @@
+Output </br>
+<% i = 0 %>
+<% while i < @tags.count do %>
+  The Links ID for: <b>"<%= @tags[i]%>"</b> are: <br/>
+  <% j = 0 %>
+  <% while j < @linksID[i] %>
+    The URL are: <%= child_array(@linksID[i][j]).as_json %><br/>
+    <% j += 1 %>
+  <%end%>
+  <% i += 1 %>
+<% end %>

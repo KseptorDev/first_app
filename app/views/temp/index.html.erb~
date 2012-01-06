@@ -1,8 +1,3 @@
-
-<% if @boo then %>
-  <h2> :) You have added a link! </h2>
-  The link: <%= @temp.link %>
-<% end %>
 <table>
   <tr>
     <th>ID</th>
@@ -14,8 +9,10 @@
     <td><%= temp.id %></td>
     <td><%= temp.link %></td>
     <td><%= temp.tags %></td>
+    <td><%= temp.image_name %></td>
   </tr>
 <% end %>
 </table>
 <br />
-<%= link_to 'Add new link', root_path %>	
+<%= link_to 'Add new link', root_path %>
+<%=  "#{root_url}images/small/1_small.jpg"	%>

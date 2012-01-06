@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   include TegsHelper
   include LinksHelper
   include TempHelper
-  
 
 end
     

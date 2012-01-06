@@ -6,6 +6,8 @@ gem 'image_size', '1.0.3'
 gem 'fastimage', '1.2.9'
 gem 'therubyracer'
 gem 'rmagick', '2.12.2'
+gem 'whenever', '0.7.2'
+gem 'chronic', '0.6.6'
 gem 'image_downloader', '0.2.4'
 # gem 'rest-open-uri'
 group :development do
