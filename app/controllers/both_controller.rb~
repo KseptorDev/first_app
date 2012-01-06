@@ -12,7 +12,6 @@ class BothController < ApplicationController
       i = 0
       while i < @tags.count do
 	@linksID <<  find_links_id(tagsID[i])
-	@temp = child_array(@linkID[i])
 	i +=1
       end
     end
