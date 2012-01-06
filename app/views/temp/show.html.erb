@@ -1,4 +1,9 @@
-<h2> <%= @output %> </h2>
-The link: <%= @temp.link %> </br>
-<%= link_to 'Add new link', root_path %>
-<%= link_to 'Show all links', index_path %>
+<% if !@output.nil? && !@temp.nil? %>
+  <h2> <%= @output %> </h2>
+  The link: <%= @temp.link %> </br>
+  <%= link_to 'Add new link', root_path %>
+  <%= link_to 'Show all links', index_path %>
+<% else %>
+  <%= "first of all ou have to add a link! :)" %> </br>
+  <%= link_to 'Add new link', root_path %>
+<% end %>

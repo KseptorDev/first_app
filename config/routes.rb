@@ -1,6 +1,6 @@
 FirstApp::Application.routes.draw do
   root :to => 'temp#new'
-  post "show" => "temp#show"
+  match "show" => "temp#show"
   get "index" => "temp#index"
   resources :temp, :tegs, :both
 

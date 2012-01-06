@@ -2,4 +2,3 @@
 The link: <%= @temp.link %> </br>
 <%= link_to 'Add new link', root_path %>
 <%= link_to 'Show all links', index_path %>
-<%= link_to 'Show all links', root_url %>

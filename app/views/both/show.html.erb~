@@ -10,4 +10,6 @@
     <%end%>
     <% i += 1 %>
   <% end %>
+<% else %>
+  <%= "You have no tags for the search" %>
 <% end %>
