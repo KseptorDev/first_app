@@ -1,13 +1,16 @@
-
-<% i = 0 %>
 <% if !@tags.nil? %>
+  <% i = 0 %>
   <% while i < @tags.count do %>
+    <% if !@linksID[i].nil? %>
     The Links ID for: <b>"<%= @tags[i]%>"</b> are: <br/>
     <% j = 0 %>
-    <% while j < @linksID[i].count %>
-      The URL are: <%= child_array(@linksID[i][j]).as_json %><br/>
-      <% j += 1 %>
-    <%end%>
+      <% while j < @linksID[i].count %>
+	The URL are: <%= child_array(@linksID[i][j]).as_json %><br/>
+	<% j += 1 %>
+      <% end %>
+    <% else %>
+      <%= "No one of this tags doesnt exist" %>
+    <% end %>
     <% i += 1 %>
   <% end %>
 <% else %>
