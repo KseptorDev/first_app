@@ -15,4 +15,3 @@
 </table>
 <br />
 <%= link_to 'Add new link', root_path %>
-<%=  "#{root_url}images/small/1_small.jpg"	%>
