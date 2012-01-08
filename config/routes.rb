@@ -1,5 +1,5 @@
 FirstApp::Application.routes.draw do
-  root :to => 'temp#new'
+  root :to => 'temp#index'
   get "add" => "temp#add_link"
   get "index" => "temp#index"
   resources :temp, :tegs, :both
