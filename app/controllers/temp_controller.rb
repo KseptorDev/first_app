@@ -7,10 +7,12 @@ class TempController < ApplicationController
     @req = Temp.all
   end
   
-  def show
-   @temp = Temp.new(params[:temp])
-    if !@temp.link.nil? || !@temp.tags.nil? 
-      if Link.find_by_link(@temp.link).nil? 
+  def add_link
+   link = (params['link'])
+   tags = (params['tags'])
+    if !link.nil? || !tags.nil? 
+      @temp = Temp.new(:link => link, :tags => tags)
+      if Link.find_by_link(@temp.link).nil?
 	@temp.update_attributes( :image_name => Digest::MD5.hexdigest(image_name(@temp.link)))
 	@output = ":) You have added a new link! :)"
 	@temp.save 
@@ -21,5 +23,4 @@ class TempController < ApplicationController
       @output = "You have no link to add, sorry :("
     end
   end  
-  
 end
