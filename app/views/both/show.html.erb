@@ -2,10 +2,10 @@
   <% i = 0 %>
   <% while i < @tags.count do %>
     <% if !@linksID[i].nil? %>
-    The Links ID for: <b>"<%= @tags[i]%>"</b> are: <br/>
+    The Result for: <b>"<%= @tags[i]%>"</b><br/>
     <% j = 0 %>
       <% while j < @linksID[i].count %>
-	The URL are: <%= child_array(@linksID[i][j]).as_json %><br/>
+	The Array is: <%= child_array(@linksID[i][j]).as_json %><br/>
 	<% j += 1 %>
       <% end %>
     <% else %>

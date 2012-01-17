@@ -1,7 +1,6 @@
 <% if !@output.nil? && !@temp.nil? %>
   <h2> <%= @output %> </h2>
   The link: <%= @temp.link  %> </br>
-  <%= link_to 'Add new link', root_path %>
   <%= link_to 'Show all links', root_path %>
 <% else %>
   <%= "first of all you have to add a link! :)" %> </br>

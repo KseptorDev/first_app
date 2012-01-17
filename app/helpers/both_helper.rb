@@ -7,6 +7,8 @@ module BothHelper
     while i < tags.count do
       if !Teg.find_by_teg(tags[i]).nil?
 	tagIdList << Teg.find_by_teg(tags[i]).id
+      else
+	tagIdList << nil
       end
       i+=1
     end
@@ -63,8 +65,4 @@ module BothHelper
     return child
   end	
   
-  def data_array
-    
-  end
-  
-  end
+end
