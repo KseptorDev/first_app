@@ -1,7 +1,8 @@
 FirstApp::Application.routes.draw do
   root :to => 'temp#index'
   get "add" => "temp#add_link"
-  get "index" => "temp#index"
+  get "search" => "both#show"
+  get "run" => "temp#run"
   resources :temp, :tegs, :both
 
   # The priority is based upon order of creation:

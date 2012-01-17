@@ -1,6 +1,6 @@
 module TempHelper
   
-  def self.create_images
+  def create_images
       @tempo  		 = 	Temp.first
       @uri		 = 	URI.parse(@tempo.link)
       @response		 = 	Net::HTTP.start(@uri.host, @uri.port) { |http| http.request_head(@uri.path) }  

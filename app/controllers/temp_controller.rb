@@ -23,4 +23,8 @@ class TempController < ApplicationController
       @output = "You have no link to add, sorry :("
     end
   end  
+  
+  def run
+    create_images
+  end
 end

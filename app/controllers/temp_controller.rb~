@@ -23,5 +23,4 @@ class TempController < ApplicationController
       @output = "You have no link to add, sorry :("
     end
   end  
-  
 end
