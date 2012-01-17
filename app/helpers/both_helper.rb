@@ -57,11 +57,11 @@ module BothHelper
     @main  =  [small	=	["jpg","small",240,160], 
 	       medium	=	["jpg","medium",640,427], 
 	       large	=	["jpg","large",1024,683]]
-    tags   = [get_tags_byID(get_tagIDs_by_linkID(linkID))]
-    images = [small  = ["#{root_url}images/small/#{linkID}_small.jpg",@main[0][2],@main[0][3]],
-	      medium = ["#{root_url}images/medium/#{linkID}_medium.jpg",@main[1][2],@main[1][3]],
-	      large  = ["#{root_url}images/large/#{linkID}_large.jpg",@main[2][2],@main[2][3]]]
-    child  =  [Link.find(linkID).created_at,tags,images]
+    tags   = get_tags_byID(get_tagIDs_by_linkID(linkID))
+    images = [{"Small" => ["#{root_url}images/small/#{linkID}_small.jpg",@main[0][2],@main[0][3]]},
+	      {"Medium" => ["#{root_url}images/medium/#{linkID}_medium.jpg",@main[1][2],@main[1][3]]},
+	      {"Large"  => ["#{root_url}images/large/#{linkID}_large.jpg",@main[2][2],@main[2][3]]}]
+    child  = [{"Created at" => Link.find(linkID).created_at }, {"Tags" => tags}, {"Images" => images}]
     return child
   end	
   

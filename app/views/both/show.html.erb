@@ -5,7 +5,7 @@
     The Result for: <b>"<%= @tags[i]%>"</b><br/>
     <% j = 0 %>
       <% while j < @linksID[i].count %>
-	The Array is: <%= child_array(@linksID[i][j]).as_json %><br/>
+	The Array is: <%= (child_array(@linksID[i][j]).to_json.html_safe) %><br/>
 	<% j += 1 %>
       <% end %>
     <% else %>
@@ -16,3 +16,4 @@
 <% else %>
   <%= "You have no tags for the search" %>
 <% end %>
+
