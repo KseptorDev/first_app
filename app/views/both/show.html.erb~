@@ -1,19 +1,11 @@
-<% if !@tags.nil? %>
+
   <% i = 0 %>
-  <% while i < @tags.count do %>
-    <% if !@linksID[i].nil? %>
-    The Result for: <b>"<%= @tags[i]%>"</b><br/>
-    <% j = 0 %>
-      <% while j < @linksID[i].count %>
-	The Array is: <%= JSON.pretty_generate(child_array(@linksID[i][j]).to_json.html_safe) %><br/>
-	<% j += 1 %>
-      <% end %>
-    <% else %>
-      <%= "No one of this tags doesnt exist" %>
-    <% end %>
+  <% while i < @images.count do %>
+    <%= (child_array(@images[i]).to_json.html_safe) %></br> 
     <% i += 1 %>
   <% end %>
-<% else %>
-  <%= "You have no tags for the search" %>
-<% end %>
 
+
+<%= @tagsID %>
+<%= @linksID %>
+<%= @images %>

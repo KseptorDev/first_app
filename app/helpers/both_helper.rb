@@ -1,12 +1,37 @@
 module BothHelper
-
+  def img_by_all_tags
+    i = 0 
+    found,temp = [], []
+    while i < @linksID.count do
+      j = 0 
+      temp.clear
+      while j < @tagsID.count do
+	z = 1
+	while z < Both.count + 1 do
+	  both = Both.find(z)
+	  if both.linkID == @linksID[i]
+	    if both.tagID == @tagsID[j]
+	      temp << both.tagID
+	    end
+	  end
+	  z +=1
+	end
+	if temp == @tagsID
+	  found << @linksID[i]
+	end
+	j+=1
+      end
+      i+=1
+    end
+    return found
+  end
   
   def find_tag_id(tags)
     tagIdList = []
     i = 0
     while i < tags.count do
-      if !Teg.find_by_teg(tags[i]).nil?
-	tagIdList << Teg.find_by_teg(tags[i]).id
+      if !Teg.find_by_teg(tags[i].strip).nil?
+	tagIdList << Teg.find_by_teg(tags[i].strip).id
       else
 	tagIdList << nil
       end
@@ -16,16 +41,14 @@ module BothHelper
   end
   
   def find_links_id(tagId)
-    linkIdList = []
     i = 1
     while i < Both.count + 1 do
       temp = Both.find(i)
-      if tagId == temp.tagID
-	linkIdList << temp.linkID
+      if tagId == temp.tagID && !@linksID.include?(temp.linkID)
+	@linksID << temp.linkID
       end
       i += 1
     end
-    return linkIdList
   end
   
   def get_tagIDs_by_linkID(linkID)
@@ -58,10 +81,10 @@ module BothHelper
 	       medium	=	["jpg","medium",640,427], 
 	       large	=	["jpg","large",1024,683]]
     tags   = get_tags_byID(get_tagIDs_by_linkID(linkID))
-    images = [{"Small" => ["#{root_url}images/small/#{linkID}_small.jpg",@main[0][2],@main[0][3]]},
-	      {"Medium" => ["#{root_url}images/medium/#{linkID}_medium.jpg",@main[1][2],@main[1][3]]},
-	      {"Large"  => ["#{root_url}images/large/#{linkID}_large.jpg",@main[2][2],@main[2][3]]}]
-    child  = [{"Created at" => Link.find(linkID).created_at }, {"Tags" => tags}, {"Images" => images}]
+    images = [{"small" => ["#{root_url}images/small/#{linkID}_small.jpg",@main[0][2],@main[0][3]]},
+	      {"medium" => ["#{root_url}images/medium/#{linkID}_medium.jpg",@main[1][2],@main[1][3]]},
+	      {"large"  => ["#{root_url}images/large/#{linkID}_large.jpg",@main[2][2],@main[2][3]]}]
+    child  = [{"created_at" => Link.find(linkID).created_at }, {"tags" => tags}, {"images" => images}]
     return child
   end	
   
