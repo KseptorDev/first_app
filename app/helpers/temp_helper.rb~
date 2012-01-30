@@ -4,7 +4,6 @@ module TempHelper
       @tempo  		 = 	Temp.first
       @uri		 = 	URI.parse(@tempo.link)
       @response		 = 	Net::HTTP.start(@uri.host, @uri.port) { |http| http.request_head(@uri.path) }  
-      image_name?
       @original_image_name = 	@tempo.image_name
       if url_file_extension != false && get_file_size
 	@imageID = Temp.first.id

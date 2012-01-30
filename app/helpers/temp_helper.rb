@@ -1,6 +1,6 @@
 module TempHelper
   
-  def self.create_images
+  def create_images
       @tempo  		 = 	Temp.first
       @uri		 = 	URI.parse(@tempo.link)
       @response		 = 	Net::HTTP.start(@uri.host, @uri.port) { |http| http.request_head(@uri.path) }  
@@ -19,14 +19,14 @@ module TempHelper
     return false
   end
 
-  def self.url_file_extension
+  def url_file_extension
     if  @response["content-type"].match(/image/)
       return true
     end
       return false
   end 
 
-  def self.get_file_size
+  def get_file_size
     file_size = @response["content-length"].to_i  
     if file_size >1 && file_size < 5242880 then
       return true
@@ -35,7 +35,7 @@ module TempHelper
     end
   end
 
-  def self.download_image
+  def download_image
     Net::HTTP.start(@uri.host, @uri.port) do |http|
 	if http.head(@uri.request_uri).code == "200"
 	resp = http.get(@tempo.link)
@@ -46,7 +46,7 @@ module TempHelper
     end
   end 
    
-  def self.server_file_type(path)
+  def server_file_type(path)
   content_type = `file --raw --brief "#{path}"`.chomp
     if content_type.match(/image|png|jpg|jpeg|gif/)
       return true
@@ -55,7 +55,7 @@ module TempHelper
     end
   end
   
-  def self.convert_image
+  def convert_image
     @main  =  [small	=	["jpg","small",240,160], 
 	       medium	=	["jpg","medium",640,427], 
 	       large	=	["jpg","large",1024,683]]
@@ -66,14 +66,14 @@ module TempHelper
     end
   end
 
-  def self.resize_image(params)
+  def resize_image(params)
      width, height = params[2], params[3]
      img =  Magick::Image.read("public/images/original/#{@original_image_name}").first
      thumb = img.resize(width, height)
      thumb.write("public/images/#{params[1]}/#{@tempo.id}_#{params[1]}.#{params[0]}")
   end
   
-  def self.add_linkID_tagsID
+  def add_linkID_tagsID
     i=0
     tag_link = [add_tag_return_IDs(@tempo.tags), add_link_return_ID(@tempo.link)]
     while i < tag_link[0].count
@@ -82,14 +82,14 @@ module TempHelper
     end
   end
   
-  def self.add_link_return_ID(link)
+  def add_link_return_ID(link)
     if Link.find_by_link(link).nil?
       Link.new(:link => link).save
     end
     return Link.find_by_link(link).id
   end
   
-  def self.add_tag_return_IDs(tag)
+  def add_tag_return_IDs(tag)
     tags = tag.split(",").collect{|x| x.strip}
     i = 0
     @IDs = []
