@@ -1,5 +1,5 @@
 class Temp < ActiveRecord::Base
-  attr_accessible :link, :tags
+  attr_accessible :link, :tags, :image_name
   
   validates :link, :presence => true
   validates :tags, :presence => true

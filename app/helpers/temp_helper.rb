@@ -4,7 +4,6 @@ module TempHelper
       @tempo  		 = 	Temp.first
       @uri		 = 	URI.parse(@tempo.link)
       @response		 = 	Net::HTTP.start(@uri.host, @uri.port) { |http| http.request_head(@uri.path) }  
-      image_name?
       @original_image_name = 	@tempo.image_name
       if url_file_extension != false && get_file_size
 	@imageID = Temp.first.id
@@ -18,12 +17,6 @@ module TempHelper
 	return false
       end
     return false
-  end
-  
-  def self.image_name?
-    if @tempo.image_name.nil?
-      @tempo.update_attributes( :image_name => Digest::MD5.hexdigest(image_name(@tempo.link)))
-    end
   end
 
   def self.url_file_extension
@@ -110,7 +103,7 @@ module TempHelper
     return @IDs
   end
   
-  def self.image_name(url)
+  def image_name(url)
     i = 1
     until ((url.last i)["/"] == "/") do
       i +=1
