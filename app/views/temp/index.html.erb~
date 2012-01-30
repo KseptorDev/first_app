@@ -11,7 +11,5 @@
     <td><%= temp.tags %></td>
   </tr>
 <% end %>
-<% data = { 'photoid' => 123, 'photoname' => "asdasd", 'creator_id' => "asdasd" } %> 
-<%= data.as_json %>
 </table>
 <br />
