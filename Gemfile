@@ -9,6 +9,7 @@ gem 'rmagick', '2.12.2'
 gem 'whenever', '0.7.2'
 gem 'chronic', '0.6.6'
 gem 'image_downloader', '0.2.4'
+gem 'rabl'
 # gem 'rest-open-uri'
 group :development do
 gem 'annotate', '2.4.0'

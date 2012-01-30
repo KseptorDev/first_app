@@ -1,7 +1,7 @@
 FirstApp::Application.routes.draw do
   root :to => 'temp#index'
   get "add" => "temp#add_link"
-  get "search" => "both#show"
+  get "search" => "both#show", :format=>false, :defaults=>{:format=>'json'}
   get "run" => "temp#run"
   resources :temp, :tegs, :both
 
@@ -17,7 +17,7 @@ FirstApp::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  #   [0]resources :products
 
   # Sample resource route with options:
   #   resources :products do

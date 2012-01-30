@@ -84,8 +84,19 @@ module BothHelper
     images = [{"small" => ["#{root_url}images/small/#{linkID}_small.jpg",@main[0][2],@main[0][3]]},
 	      {"medium" => ["#{root_url}images/medium/#{linkID}_medium.jpg",@main[1][2],@main[1][3]]},
 	      {"large"  => ["#{root_url}images/large/#{linkID}_large.jpg",@main[2][2],@main[2][3]]}]
-    child  = [{"created_at" => Link.find(linkID).created_at }, {"tags" => tags}, {"images" => images}]
+    child  = {:created_at => Link.find(linkID).created_at }, {:tags => tags}, {:images => images}
     return child
   end	
+  
+  def father(found)
+    @output = []
+    i=0
+    while i < found.count do 
+      @output << child_array(found[i])
+      i += 1
+    end
+  end
+  
+
   
 end

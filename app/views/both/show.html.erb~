@@ -1,11 +1,3 @@
-
-  <% i = 0 %>
-  <% while i < @images.count do %>
-    <%= (child_array(@images[i]).to_json.html_safe) %></br> 
-    <% i += 1 %>
-  <% end %>
-
-
-<%= @tagsID %>
-<%= @linksID %>
-<%= @images %>
+<%=@linksID %> 
+<%=@tagsID %> 
+<!-- <%=@output %>  -->

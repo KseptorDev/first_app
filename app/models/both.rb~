@@ -1,0 +1,17 @@
+class Both < ActiveRecord::Base
+  has_many :childs
+end
+
+class Child < ActiveRecord::Base
+  belongs_to :both
+  has_many :tags
+  has_many :images
+end
+
+class Tags < ActiveRecord::Base
+  belongs_to :child
+end
+
+class Images < ActiveRecord::Base
+  belongs_to :child
+end
