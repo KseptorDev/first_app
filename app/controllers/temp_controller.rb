@@ -28,5 +28,3 @@ class TempController < ApplicationController
     create_images
   end
 end
-cd /data/KseptorFA/current && bundle exec rails runner -e production 'TempHelper.create_images'
-cd /data/appname/current && bundle exec rails runner -e production 'SomeClass.method'
