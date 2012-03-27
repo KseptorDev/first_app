@@ -6,7 +6,7 @@ module TempHelper
       @uri		 = 	URI.parse(URI.encode(@tempo.link))
       @response		 = 	Net::HTTP.start(@uri.host, @uri.port) { |http| http.request_head(@uri.path) }  
       @original_image_name = 	@tempo.image_name
-      if url_file_extension != false && get_file_size
+      if url_file_extension && get_file_size
 	@imageID = Temp.first.id
 	download_image
 	if server_file_type("public/images/original/#{@original_image_name}")
@@ -25,6 +25,7 @@ module TempHelper
     if  @response["content-type"].match(/image/)
       return true
     end
+      Temp.first.delete
       return false
   end 
 
@@ -33,6 +34,7 @@ module TempHelper
     if file_size >1 && file_size < 5242880 then
       return true
     else
+      Temp.first.delete
       return false
     end
   end
@@ -53,6 +55,7 @@ module TempHelper
     if content_type.match(/image|png|jpg|jpeg|gif/)
       return true
     else
+      Temp.first.delete
       return false
     end
   end

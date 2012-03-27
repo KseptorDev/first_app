@@ -5,15 +5,20 @@
     position:relative;
     overflow:hidden;
     margin:0 auto;
-    background:#212121;
+    background:#000000;
 }
 /* Wall */
 #wall{
     z-index:1;
 }
     /* Tile Wall create */
-    #wall .tile{
-        color:#FFFFFF;
-        text-align:center;
-        line-height:245px;
-    }
+#wall .tile{
+    color:#FFFFFF;
+    text-align:center;
+    line-height:245px;
+}
+
+#wall div {
+	    background: transparent url(media/loading.gif) no-repeat center center;
+	    padding: 5px;
+}

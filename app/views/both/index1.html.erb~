@@ -58,7 +58,7 @@
 				_url += "&max_timestamp="+_img._time;
 			}
 			
-			_url = _url+"&client_id=6dc77992d43a4e88906d8963d409c81d&callback=?";
+			_url = _url+"&client_id = "public/imag=6dc77992d43a4e88906d8963d409c81d&callback=?";
 			
 			_j.getJSON( _url , function( _res ) {
 				_j.each( _res.data , function() {
