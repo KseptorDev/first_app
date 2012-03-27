@@ -41,7 +41,7 @@ module TempHelper
     Net::HTTP.start(@uri.host, @uri.port) do |http|
 	if http.head(@uri.request_uri).code == "200"
 	resp = http.get(@tempo.link)
-	open("public/images/original/#{@original_image_name}", "wb") do |file|
+	open("/public/images/original/#{@original_image_name}", "wb") do |file|
 	    file.write(resp.body)
 	end
       end
