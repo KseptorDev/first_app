@@ -9,9 +9,9 @@ module TempHelper
       if url_file_extension != false && get_file_size
 	@imageID = Temp.first.id
 	download_image
-	if server_file_type("public/images/original/#{@original_image_name}")
+	if server_file_type("images/original/#{@original_image_name}")
 	  convert_image
-	  File.delete("public/images/original/#{@original_image_name}")
+	  File.delete("images/original/#{@original_image_name}")
 	  Temp.first.delete
 	  return true
 	end
@@ -41,7 +41,7 @@ module TempHelper
     Net::HTTP.start(@uri.host, @uri.port) do |http|
 	if http.head(@uri.request_uri).code == "200"
 	resp = http.get(@tempo.link)
-	open("public/images/original/#{@original_image_name}", "wb") do |file|
+	open("images/original/#{@original_image_name}", "wb") do |file|
 	    file.write(resp.body)
 	end
       end
@@ -69,8 +69,8 @@ module TempHelper
   end
 
   def resize_image(params)
-     path = "public/images/#{params[1]}/#{@tempo.id}_#{params[1]}.#{params[0]}"
-     img =  Magick::Image.read("public/images/original/#{@original_image_name}").first
+     path = "images/#{params[1]}/#{@tempo.id}_#{params[1]}.#{params[0]}"
+     img =  Magick::Image.read("images/original/#{@original_image_name}").first
      target = Magick::Image.new(params[2], params[3])
      thumb = img.resize_to_fill!(params[2], params[3])
      target.composite(thumb, Magick::CenterGravity, Magick::CopyCompositeOp).write(path)
