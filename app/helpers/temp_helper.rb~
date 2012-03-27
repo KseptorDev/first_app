@@ -15,11 +15,11 @@ module TempHelper
 	  Temp.first.delete
 	  return true
 	end
-	return false
 	Temp.first.delete
+	return false
       end
-      return false
       Temp.first.delete
+      return false
     end
   end
 
