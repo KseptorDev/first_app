@@ -3,7 +3,7 @@ module TempHelper
   def create_images
     if Temp.first != Temp.last
       @tempo  		 = 	Temp.first
-      @uri		 = 	URI.parse(@tempo.link)
+      @uri		 = 	URI.parse(URI.encode(@tempo.link))
       @response		 = 	Net::HTTP.start(@uri.host, @uri.port) { |http| http.request_head(@uri.path) }  
       @original_image_name = 	@tempo.image_name
       if url_file_extension != false && get_file_size

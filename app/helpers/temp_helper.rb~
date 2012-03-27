@@ -3,7 +3,7 @@ module TempHelper
   def create_images
     if Temp.first != Temp.last
       @tempo  		 = 	Temp.first
-      @uri		 = 	URI.parse(@tempo.link)
+      @uri		 = 	URI.parse(URI.encode(@tempo.link))
       @response		 = 	Net::HTTP.start(@uri.host, @uri.port) { |http| http.request_head(@uri.path) }  
       @original_image_name = 	@tempo.image_name
       if url_file_extension != false && get_file_size
@@ -71,27 +71,9 @@ module TempHelper
   def resize_image(params)
      path = "public/images/#{params[1]}/#{@tempo.id}_#{params[1]}.#{params[0]}"
      img =  Magick::Image.read("public/images/original/#{@original_image_name}").first
-#      if img.columns < img.rows
-#        height = params[3]
-#        min = img.rows - height
-#        width = img.columns - min
-#        mim = width - params[2]
-#        thumb = img.resize(width, height)
-#        thumb = thumb.crop(min/2,0,240,160,true)
-#      else if
-#        img.columns > img.rows
-#        width = params[2]
-#        min = img.columns - width
-#        height = img.rows - min
-#        min = height - params[3]
-#        thumb = img.resize(width, height)
-#      end
-     
-target = Magick::Image.new(params[2], params[3])
-thumb = img.resize_to_fill!(params[2], params[3])
-target.composite(thumb, Magick::CenterGravity, Magick::CopyCompositeOp).write(path)
-     
-#      thumb.write(path)
+     target = Magick::Image.new(params[2], params[3])
+     thumb = img.resize_to_fill!(params[2], params[3])
+     target.composite(thumb, Magick::CenterGravity, Magick::CopyCompositeOp).write(path)
      @tempo.width, @tempo.height = "#{params[2]}", "#{params[3]}"
      add_linkID_tagsID(path,params[1])
      File.delete(path)
