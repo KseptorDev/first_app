@@ -1,1 +1,0 @@
-attributes :created_at, :tags, :images

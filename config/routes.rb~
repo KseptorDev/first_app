@@ -1,8 +1,10 @@
 FirstApp::Application.routes.draw do
   root :to => 'temp#index'
   get "add" => "temp#add_link"
-  get "search" => "both#show", :format=>false, :defaults=>{:format=>'json'}
+  get "search" => "both#search", :format=>false, :defaults=>{:format=>'json'}
+  match "gallery" => "both#index"
   get "run" => "temp#run"
+  get "test" => "both#test"
   resources :temp, :tegs, :both
 
   # The priority is based upon order of creation:
@@ -11,7 +13,7 @@ FirstApp::Application.routes.draw do
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
-[0]
+
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)

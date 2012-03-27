@@ -1,0 +1,16 @@
+		    <script type="text/javascript">
+		      $.getJSON("http://localhost:3000/search?tag[]=tes@!",function(result){
+			    var arr = [], i = 0;
+			    $.each(result, function(key, val){
+				var j = 0;
+				$.each(result[i], function(key, val){
+				    $.each(result[i].images[j], function(key, val){	
+					var _img = $("<img>").attr("src", val.link);
+					$("myGallery").append(_img);
+				    });
+				    j ++;
+				});
+				i ++;
+			    });
+		      });
+		    </script>

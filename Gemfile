@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
-
+gem 'fog'
+gem 'jquery-rails'
+gem 'carrierwave'
 gem 'rails', '3.1.0'
 gem 'mysql2', '0.3.11'
 gem 'image_size', '1.0.3'

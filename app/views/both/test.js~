@@ -1,0 +1,5 @@
+<script>
+$.getJSON("http://localhost:3000/search?tag[]=good", function(data){
+  $.alert(data);
+});
+<script/>

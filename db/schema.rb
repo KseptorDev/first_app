@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111222163645) do
+ActiveRecord::Schema.define(:version => 20120204102422) do
 
   create_table "boths", :force => true do |t|
     t.integer  "tagID"
@@ -24,6 +24,11 @@ ActiveRecord::Schema.define(:version => 20111222163645) do
     t.string   "link"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "original"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "image"
+    t.string   "size"
   end
 
   create_table "tegs", :force => true do |t|
@@ -38,6 +43,8 @@ ActiveRecord::Schema.define(:version => 20111222163645) do
     t.string   "image_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "width"
+    t.string   "height"
   end
 
 end

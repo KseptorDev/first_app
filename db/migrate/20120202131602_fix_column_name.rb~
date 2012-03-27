@@ -1,0 +1,10 @@
+class FixColumnName < ActiveRecord::Migration
+  def up
+    rename_column  :link,:originallink, :original
+  end
+
+  def down
+    rename_column :Temp, :originallink, :original
+    rename_column :Link, :originallink, :original
+  end
+end

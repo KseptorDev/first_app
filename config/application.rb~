@@ -6,7 +6,16 @@ require File.expand_path('../boot', __FILE__)
   require 'fastimage'
   require 'image_downloader'
   require 'fileutils'
-
+  require 'RMagick'
+  require 'carrierwave'
+  require 'carrierwave/orm/activerecord'
+  require 'fog'
+  Fog.credentials_path = Rails.root.join('config/fog_credentials.yml')
+ 
+  CarrierWave.configure do |config|
+    config.fog_credentials = {:provider => 'AWS'}
+    config.fog_directory = "my-bucket" # required
+  end
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line

@@ -1,0 +1,42 @@
+<script type="text/javascript">
+var _j = $.noConflict();
+</script> 
+      <link rel="stylesheet" href="assets/plasm-the-wall-ec4b998/Demos/assets/css/default.css" />
+      <link rel="stylesheet" href="assets/plasm-the-wall-ec4b998/Demos/assets/css/01-wall.css"  />
+      <script src="assets/plasm-the-wall-ec4b998/Demos/assets/javascript/framework/mootools-core-1.3.2.js" type="text/javascript" charset="utf-8"></script>
+      <script src="assets/plasm-the-wall-ec4b998/Demos/assets/javascript/framework/mootools-more-1.3.2.1.js" type="text/javascript" charset="utf-8"></script>
+      <script src="assets/plasm-the-wall-ec4b998/Source/wall.js" type="text/javascript" charset="utf-8"></script>
+      <h1>The Wall</h1>
+      <div id="viewport">
+	  <div id="wall"></div>
+      </div>
+    <script type="text/javascript">
+
+    _j.getJSON("http://localhost:3000/search?tag[]=good",function(result){
+    var maxLength = 100; 
+    var counter   = 1;
+    var k= 0 ;
+    var wall = new Wall("wall", { 
+			"draggable":true,
+			"inertia":true,
+			"width":245, 
+			"height":165, 
+			"rangex":[-100,100], 
+			"rangey":[-100,100], 
+			callOnUpdate: function(items){ 
+			    items.each(function(e, i){ 
+			      if(k == result.length) k= 0 ;
+			      var img = result[k].images[0].small.link;
+				  k++;
+			      var a = new Element("img[src="+img+"]"); 
+				  a.inject(e.node).fade("hide").fade("in"); 
+			      counter++; 
+			      if( counter > maxLength ) counter = 1;
+			  }) 
+			} 
+		    });
+    wall.initWall();
+    });
+    </script>
+  </body>
+</html>

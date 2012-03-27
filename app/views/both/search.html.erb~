@@ -1,0 +1,11 @@
+<% form_for(@search, :method => "get", :url => search_path) do |f| %>
+  <div class="field">
+
+    <%= f.label :tag %><br />
+
+    <%= f.text_field :tag %>
+
+  </div>
+
+<%= f.submit "Submit" %>
+<% end %>

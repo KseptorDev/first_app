@@ -15,12 +15,16 @@ class BothController < ApplicationController
 	  i +=1
 	end
       end
-      father(img_by_all_tags).to_json.html_safe
+      father(img_by_all_tags)
     end
     respond_to do |format|
       format.html
-      format.json { render :json => @output}
+      format.json { render :json => @output.to_json, :callback => params[:callback]}
     end
-  end 
+  end
+  
+  def index
+    
+  end
 end
 

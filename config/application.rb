@@ -7,6 +7,9 @@ require File.expand_path('../boot', __FILE__)
   require 'image_downloader'
   require 'fileutils'
   require 'RMagick'
+  require 'carrierwave'
+  require 'carrierwave/orm/activerecord'
+  require 'fog'	
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line

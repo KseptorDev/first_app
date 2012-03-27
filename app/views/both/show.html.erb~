@@ -1,3 +1,2 @@
-<%=@linksID %> 
-<%=@tagsID %> 
-<!-- <%=@output %>  -->
+
+<%=@output %> 

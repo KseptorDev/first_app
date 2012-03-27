@@ -1,0 +1,228 @@
+
+<!doctype html> 
+<html lang="en" class="no-js"> 
+<head> 
+	<meta charset="UTF-8"> 
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" /> 
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" /> 
+	<meta name="title" content="The instagram Wall"> 
+	
+	
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/reset/reset-min.css"> 
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script> 
+	<script type="text/javascript"> 
+	var _j = $.noConflict();
+ 
+	_tracer = {
+		_onmove : false
+	}
+	
+	_req = {
+		
+	}
+	
+	_img = {
+		_list : [] ,
+		_total : 0,
+		_now : 1,
+		_loaded : 0,
+		_to_load : 5,
+		_time : 0 ,
+		_geo : {} ,
+		_next : function( ) {
+			if( _img._now >= _img._total ) {
+				_img._now = 1;
+			}
+			return _img._list[ _img._now++ ];
+		} ,
+		_location : function( _lat, _lng ) {
+			if( _lat ) {
+				_img._geo = {
+					_lat : _lat ,
+					_lng : _lng
+				};
+			}
+			
+			var _url = "https://api.instagram.com/v1/media/search?distance=200&lat="+_img._geo._lat+"&lng="+_img._geo._lng;
+ 
+			_img._get( _url );
+		} ,
+		
+		_get :  function( _url ) {
+			
+			if( _img.next_max_id ) {
+				_url += "&max_tag_id="+_img.next_max_id;
+			} else if( _img._time ) {
+				_url += "&max_timestamp="+_img._time;
+			}
+			
+			_url = _url+"&client_id = "public/imag=6dc77992d43a4e88906d8963d409c81d&callback=?";
+			
+			_j.getJSON( _url , function( _res ) {
+				_j.each( _res.data , function() {
+					_img._list[ _img._total++ ] =  {
+						link : this.images.thumbnail.url ,
+						big: this.images.standard_resolution.url
+					};
+					_img._time = this.created_time;
+				});
+				_img._to_load--;
+				
+				_img.next_max_id = _res.pagination.next_max_id;
+				
+				if( _img._to_load ) {
+					//_img._location();
+					//_img._load();
+					_img._tag();
+				} else {
+					_img._show();
+				}
+			});
+		} ,
+		_load : function( ) {
+		
+			var _url = "https://api.instagram.com/v1/media/popular/?";
+ 
+			_img._get( _url );
+		} ,
+		
+		_tag : function( _tag ) {
+			
+			if( _tag ) {
+				_img._the_tag = _tag;
+			} 
+			
+			var _url = "https://api.instagram.com/v1/tags/"+_img._the_tag+"/media/recent/?";
+ 
+			_img._get( _url );
+		} ,
+		_show : function() {
+			if( !_img._loaded ) {
+				_wall._start();
+			}
+		}
+	}
+	_modal = {
+		_el : {} ,
+		_wall : {} ,
+		_ : function() {
+			_modal._wall = _j("#wall");
+			
+			(_modal._el = _j("#modal")).click( function() {
+				_modal._el.hide();
+				_modal._wall.css( "opacity", 1 );
+			});
+		} ,
+		show : function ( _img, _width ) {
+			_modal._el.html( "<img src='"+_img+"' />").css("margin-left" , ( _width / -2 ) ).show();
+			_modal._wall.css( "opacity", 0.5 );
+		}
+	}
+	_j("document").ready( function(){
+		
+		/*navigator.geolocation.getCurrentPosition(
+			function( _loc ) { 
+				_img._location( _loc.coords.latitude , _loc.coords.longitude ); 
+			}
+		);*/
+		//_img._load();
+		_img._tag("climbing");
+		_modal._();
+		
+		_j("#wall").delegate( "img" , "click" , function() {
+			if( !_wall._fluid.getMovement() ) {
+				var _e = $(this)
+				_modal.show( _e.retrieve("big") );
+			}
+		});
+		//_img._load( 1 );
+		//_img._load( 2 );
+		//_img._load( 3 );
+	});
+	</script> 
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/mootools/1.3.2/mootools-yui-compressed.js" type="text/javascript" charset="utf-8"></script> 
+	<script src="media/mootools-more.js" type="text/javascript" charset="utf-8"></script> 
+	<script src="media/wall.js" type="text/javascript" charset="utf-8"></script> 
+	
+	<style type="text/css"> 
+		body , html {
+			width: 100%;
+			height: 100%;
+		}
+		#viewport{
+	        width:100%;
+	        height:100%;
+	        position:relative;
+	        overflow:hidden;
+	        margin:0 auto;
+	        background:#111111 url(media/load.png) no-repeat center center;
+	    }
+	
+	    #wall{
+	        z-index:1;
+	    }
+	    
+	    #wall div {
+	    	background: transparent url(media/loading.gif) no-repeat center center;
+	    	padding: 5px;
+	    }
+	    #modal {
+	    	background: black;
+			border: 3px solid #878787;
+			border-radius: 6px;
+/* 			padding: 5px; */
+			position: fixed;
+			top: 20px;
+			left: 50%;
+			z-index: 10000;
+			display: none;
+			margin-left: -306px;
+	    }
+	</style> 
+</head> 
+ 
+<body> 
+ 
+<div id="viewport"><div id="wall"></div></div> 
+ 
+<script type="text/javascript"> 
+_x = 0;
+_wall = {
+	_ : function() {
+		
+	} ,
+	_pictures : function( _res ) {
+		
+	} ,
+	_start : function() {
+		_wall._fluid = new Wall("wall", 
+		{
+			 "draggable":true,
+             "inertia":true,
+             "width":150,
+             "height":150,
+             "rangex":[-100,100],
+             "rangey":[-100,100],
+             callOnUpdate: function(items){
+             
+                 items.each(function(e, i){
+                 	var _i = _img._next();
+                    var a = new Element("img[src="+_i.link+"]");
+                     
+                    a.store( "big" , _i.big ).inject(e.node).fade("hide").fade("in");
+                 });
+             }
+		});
+		_wall._fluid.initWall();
+	}
+}
+ 
+ 
+</script> 
+ 
+<div id="modal"></div> 
+</body> 
+</html>

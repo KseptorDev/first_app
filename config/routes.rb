@@ -2,7 +2,9 @@ FirstApp::Application.routes.draw do
   root :to => 'temp#index'
   get "add" => "temp#add_link"
   get "search" => "both#show", :format=>false, :defaults=>{:format=>'json'}
+  match "gallery" => "both#index"
   get "run" => "temp#run"
+  get "test" => "both#test"
   resources :temp, :tegs, :both
 
   # The priority is based upon order of creation:

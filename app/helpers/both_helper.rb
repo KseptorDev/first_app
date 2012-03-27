@@ -56,7 +56,7 @@ module BothHelper
     i = 1
     while i < Both.count + 1 do
       temp = Both.find(i)
-      if linkID == temp.linkID
+      if linkID.include?(temp.linkID)
 	idList << temp.tagID
       end
       i += 1
@@ -75,28 +75,38 @@ module BothHelper
     return tags
   end
   
-  
-  def child_array(linkID)
-    @main  =  [small	=	["jpg","small",240,160], 
-	       medium	=	["jpg","medium",640,427], 
-	       large	=	["jpg","large",1024,683]]
-    tags   = get_tags_byID(get_tagIDs_by_linkID(linkID))
-    images = [{"small" => ["#{root_url}images/small/#{linkID}_small.jpg",@main[0][2],@main[0][3]]},
-	      {"medium" => ["#{root_url}images/medium/#{linkID}_medium.jpg",@main[1][2],@main[1][3]]},
-	      {"large"  => ["#{root_url}images/large/#{linkID}_large.jpg",@main[2][2],@main[2][3]]}]
-    child  = {:created_at => Link.find(linkID).created_at }, {:tags => tags}, {:images => images}
+  def child_array(linksID)
+    tags    =	get_tags_byID(get_tagIDs_by_linkID(linksID))
+    objects =	Link.find(linksID)
+    i = 0
+    images = []
+    while i < objects.count do   
+      images <<  {:"#{objects[i].size}" => {:link => objects[i].image.url, :width => objects[i].width,:height => objects[i].height}}
+      i+=1
+    end
+    child   =	{:created_at => objects[0].created_at, :tags => tags, :images => images}
     return child
   end	
   
   def father(found)
     @output = []
     i=0
+    same = []
     while i < found.count do 
-      @output << child_array(found[i])
-      i += 1
+      j = 0
+      same.clear
+      while j < found.count do
+	if Link.find(found[i]).original == Link.find(found[j]).original
+	  same << found[j]
+	end
+	j +=1
+      end
+      @output << child_array(same)
+      i += 3
     end
   end
-  
-
-  
 end
+
+
+
+

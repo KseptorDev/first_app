@@ -1,0 +1,4 @@
+<form name="search" method="get">
+Tags: <input type="text" name="tag" /><br />
+<input type="submit" value="Submit" />
+</form>

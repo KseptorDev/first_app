@@ -9,6 +9,7 @@
     <td><%= temp.id %></td>
     <td><%= temp.link %></td>
     <td><%= temp.tags %></td>
+<td><%= temp.image_name %></td>
   </tr>
 <% end %>
 </table>

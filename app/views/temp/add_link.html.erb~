@@ -1,7 +1,7 @@
 <% if !@output.nil? && !@temp.nil? %>
   <h2> <%= @output %> </h2>
-  The link: <%= @temp.link  %> </br>
+  The link: <%= @temp.original  %> </br>
   <%= link_to 'Show all links', root_path %>
 <% else %>
-  <%= "first of all you have to add a link! :)" %> </br>
+  <%= "Sorry, something went wrong" %> </br>
 <% end %>

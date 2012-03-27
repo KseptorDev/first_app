@@ -1,0 +1,68 @@
+
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+  <!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en" class="no-js"> <!--<![endif]-->
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <title>The Wall | A javascript plugin for Mootools</title>    
+      <link rel="stylesheet" href="assets/plasm-the-wall-ec4b998/Demos/assets/css/default.css" />
+      <link rel="stylesheet" href="assets/plasm-the-wall-ec4b998/Demos/assets/css/01-wall.css"  />
+
+      <script src="assets/plasm-the-wall-ec4b998/Demos/assets/javascript/framework/mootools-core-1.3.2.js" type="text/javascript" charset="utf-8"></script>
+      <script src="assets/plasm-the-wall-ec4b998/Demos/assets/javascript/framework/mootools-more-1.3.2.1.js" type="text/javascript" charset="utf-8"></script>
+      <!-- The Wall -->
+      <script src="../assets/plasm-the-wall-ec4b998/Source/wall.js" type="text/javascript" charset="utf-8"></script>
+  </head>
+  <body>
+      <h1>01 - The Wall</h1>
+      <div id="viewport">
+	  <div id="wall"></div>
+      </div>
+    <script type="text/javascript">
+    // Define The Wall 
+    var maxLength = 100; // Max Number images or array length 
+    var counter   = 1; 
+    var wall = new Wall("wall", { 
+			"width":150, 
+			"height":150, 
+			"rangex":[-100,100], 
+			"rangey":[-100,100], 
+			callOnUpdate: function(items){ 
+			    items.each(function(e, i){ 
+				$.getJSON("http://localhost:3000/search?tag[]=good&tag[]=bad",function(result){
+				      var arr = [], i = 0;
+				      $.each(result, function(key, val){
+					  var j = 0;
+					  $.each(result[i], function(key, val){
+					      $.each(result[i].images[j], function(key, val){	
+						  var a = new Element("img[src=val.link]"); 
+						      a.inject(e.node).fade("hide").fade("in"); 
+						  counter++; 
+					      });
+					      j ++;
+					  });
+					  i ++;
+				      });
+				});
+				// This is example code 
+
+				// Reset counter 
+				if( counter > maxLength ) counter = 1; 
+			    }) 
+			} 
+		    });
+    // Init Wall 
+    wall.initWall();
+    </script>
+      <!--[if lt IE 7 ]>
+      <script src="/application/assets/javascript/dd_belatedpng.js"></script>
+      <script> DD_belatedPNG.fix('img, .png_bg');</script>
+      <![endif]-->
+  </body>
+</html>
