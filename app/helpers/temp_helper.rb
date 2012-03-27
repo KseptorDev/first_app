@@ -15,8 +15,10 @@ module TempHelper
 	  Temp.first.delete
 	  return true
 	end
+	Temp.first.delete
 	return false
       end
+      Temp.first.delete
       return false
     end
   end
