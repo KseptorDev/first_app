@@ -25,5 +25,6 @@ class TempController < ApplicationController
   end  
   
   def run
+    create_images
   end
 end

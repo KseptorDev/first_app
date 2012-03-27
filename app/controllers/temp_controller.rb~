@@ -3,7 +3,7 @@ class TempController < ApplicationController
     @temp = Temp.new
   end
   
-  def index
+  def index 
     @req = Temp.all
   end
   
