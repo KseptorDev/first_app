@@ -5,17 +5,20 @@ class BothController < ApplicationController
   
   def show
     if !params['tag'].nil?
-      tags = params['tag']
-      @tagsID = find_tag_id(tags)
-      @linksID = []
-      if !@tagsID.empty?
+      tags 	= params['tag']
+      per_req 	= params['per_req'].to_i
+      last 	= params['last'].to_i
+      total 	= params['total'].to_i
+      tagsID 	= find_tag_id(tags,total)
+      linksID 	= []
+      if !tagsID.empty?
 	i = 0
-	while i < tags.count do
-	  find_links_id(@tagsID[i])
+	while i < tags.count and linksID.count <= total do
+	  linksID +=find_links_id(tagsID[i],linksID)
 	  i +=1
 	end
       end
-      father(img_by_all_tags)
+      father(img_by_all_tags(total, linksID, tagsID),last,per_req)
     end
     respond_to do |format|
       format.html

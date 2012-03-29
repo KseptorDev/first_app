@@ -1,42 +1,135 @@
 <script type="text/javascript">
 var _j = $.noConflict();
 </script> 
-      <link rel="stylesheet" href="assets/plasm-the-wall-ec4b998/Demos/assets/css/default.css" />
-      <link rel="stylesheet" href="assets/plasm-the-wall-ec4b998/Demos/assets/css/01-wall.css"  />
-      <script src="assets/plasm-the-wall-ec4b998/Demos/assets/javascript/framework/mootools-core-1.3.2.js" type="text/javascript" charset="utf-8"></script>
-      <script src="assets/plasm-the-wall-ec4b998/Demos/assets/javascript/framework/mootools-more-1.3.2.1.js" type="text/javascript" charset="utf-8"></script>
-      <script src="assets/plasm-the-wall-ec4b998/Source/wall.js" type="text/javascript" charset="utf-8"></script>
-      <h1>The Wall</h1>
-      <div id="viewport">
-	  <div id="wall"></div>
-      </div>
-    <script type="text/javascript">
+  <link rel="stylesheet" href="assets/plasm-the-wall-ec4b998/Demos/assets/css/default.css" />
+  <link rel="stylesheet" href="assets/plasm-the-wall-ec4b998/Demos/assets/css/01-wall.css"  />
+  <script src="assets/plasm-the-wall-ec4b998/Demos/assets/javascript/framework/mootools-core-1.3.2.js" type="text/javascript" charset="utf-8"></script>
+  <script src="assets/plasm-the-wall-ec4b998/Demos/assets/javascript/framework/mootools-more-1.3.2.1.js" type="text/javascript" charset="utf-8"></script>
+  <script src="assets/plasm-the-wall-ec4b998/Source/wall.js" type="text/javascript" charset="utf-8"></script>
+  <h1>The Wall</h1>
 
-    _j.getJSON("http://ec2-23-21-100-80.compute-1.amazonaws.com/search?tag[]=climbing",function(result){
-    var maxLength = 100; 
-    var counter   = 1;
-    var k= 0 ;
-    var wall = new Wall("wall", { 
-			"draggable":true,
-			"inertia":true,
-			"width":245, 
-			"height":165, 
-			"rangex":[-100,100], 
-			"rangey":[-100,100], 
-			callOnUpdate: function(items){ 
-			    items.each(function(e, i){ 
-			      if(k == result.length) k= 0 ;
-			      var img = result[k].images[0].small.link;
-				  k++;
-			      var a = new Element("img[src="+img+"]"); 
-				  a.inject(e.node).fade("hide").fade("in"); 
-			      counter++; 
-			      if( counter > maxLength ) counter = 1;
-			  }) 
-			} 
+  <form name="wall">
+  tag <input type="text" name="_tag">
+  _total <input type="text" name="_total" value="Minimum 20" onClick=ClearField()>
+  <INPUT NAME="Generate" VALUE="Generate" TYPE=BUTTON onClick=wallData(this.wall)>
+  </form>
+
+
+  <div id="viewport">
+      <div id="wall"></div>
+  </div>
+  <script type="text/javascript">
+  function ClearField()
+  {
+    document.wall._total.value= "";
+  }
+_img = {
+	_list	: [],
+	_now	: 0,
+	_count	: 0,
+	_tag 	: 0,
+	_total	: 0,
+	_per_req: 0,
+	_last 	: 0,
+	_loaded : 0,
+	_to_load: 5,
+	_next	: function( ) {
+		if( _img._now >= _img._count ) {
+			_img._now = 0;
+		}
+		return _img._list[ _img._now++ ];
+	},
+	_get 	: function () {
+		  _j.getJSON("http://localhost:3000/search?tag[]="+_img._tag+"&per_req="+_img._per_req+"&last="+_img._last+"&total="+_img._total+"&callback=?",function(result){
+		      _j.each( result , function() {
+		      _img._list[_img._count] = {
+			small : this.images[0].small.link,
+			medium: this.images[1].medium.link,
+			large : this.images[2].large.link
+		      };
+		      _img._count ++; 
 		    });
-    wall.initWall();
-    });
-    </script>
-  </body>
-</html>
+		    _img._to_load--;	
+		    if( _img._to_load && _img._total >= _img._count ) {
+		      _img._params();
+		    } else {
+		      _img._show();
+		    }
+		  });
+		},
+		_params : function () {
+		  _img._last = _img._count;
+		  _img._get ();
+		},
+		_show : function() {
+			if( !_img._loaded ) {
+				_wall._new();
+			}
+		}
+}
+	_modal = {
+		_el : {} ,
+		_wall : {} ,
+		_ : function() {
+			_modal._wall = _j("#wall");
+			
+			(_modal._el = _j("#modal")).click( function() {
+				_modal._el.hide();
+				_modal._wall.css( "opacity", 1 );
+			});
+		} ,
+		show : function ( _img, _width ) {
+			_modal._el.html( "<img src='"+_img+"' />").css("margin-left" , ( _width / -2 ) ).show();
+			_modal._wall.css( "opacity", 0.5 );
+		}
+	}
+
+	_j("document").ready( function(){
+		
+		_modal._();
+		
+		_j("#wall").delegate( "img" , "click" , function() {
+			if( !_wall._new.getMovement() ) {
+				var _e = $(this)
+				_modal.show( _e.retrieve("medium") );
+			}
+		});
+	});
+	
+	function wallData(wall)
+	{ 
+	  _img._total 	 = document.forms["wall"]["_total"].value;
+	  _img._tag	 = document.forms["wall"]["_tag"].value;
+	  if ( _img._total < 20 ) document.wall._total.value= "I said minimum 20!";
+	  else if ( !_img._tag || _img._tag == "Insert Tag!") document.wall._tag.value= "Insert Tag!";
+	  else
+	  {
+	    _img._per_req = _img._total/3;
+	    _img._get ();
+	  }	
+	};
+	_wall = {
+		_new : function() {
+			_wall._new = new Wall("wall", 
+			  {
+			    "draggable":true,
+			    "inertia":true,
+			    "width":245, 
+			    "height":165, 
+			    "rangex":[-100,100], 
+			    "rangey":[-100,100],
+			    callOnUpdate: function(items){
+	    
+			      items.each(function(e, i){
+			      var _i = _img._next();
+			      console.log(_img._now);
+			      var a = new Element("img[src="+_i.small+"]");  
+			      a.store( "medium" , _i.medium ).inject(e.node).fade("hide").fade("in");
+			      });
+			    }			
+			  });
+			_wall._new.initWall();
+		}
+	}
+
+</script>

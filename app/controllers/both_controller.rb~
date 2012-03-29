@@ -5,22 +5,25 @@ class BothController < ApplicationController
   
   def show
     if !params['tag'].nil?
-      tags = params[:callback]
-      @tagsID = find_tag_id(tags)
-      @linksID = []
-      if !@tagsID.empty?
+      tags 	= params['tag']
+      per_req 	= params['per_req'].to_i
+      total 	= params['total'].to_i*3
+      @last 	= params['last'].to_i
+      tagsID 	= find_tag_id(tags,total)
+      linksID 	= []
+      if !tagsID.empty?
 	i = 0
-	while i < tags.count do
-	  find_links_id(@tagsID[i])
+	while i < tags.count and linksID.count <= total do
+	  linksID +=find_links_id(tagsID[i],linksID)
 	  i +=1
 	end
       end
-      father(img_by_all_tags)
+      father(img_by_all_tags(total, linksID, tagsID),per_req)
     end
+    @output << { :last => @last }
     respond_to do |format|
       format.html
       format.json { render :json => @output.to_json, :callback => params[:callback]}
-      
     end
   end
   
