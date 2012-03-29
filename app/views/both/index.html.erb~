@@ -101,7 +101,7 @@ _img = {
 	  _img._total 	 = document.forms["wall"]["_total"].value;
 	  _img._tag	 = document.forms["wall"]["_tag"].value;
 	  if ( _img._total < 20 ) document.wall._total.value= "I said minimum 20!";
-	  else if ( !_img._tag ) document.wall._tag.value= "Insert Tag!";
+	  else if ( !_img._tag || _img._tag == "Insert Tag!") document.wall._tag.value= "Insert Tag!";
 	  else
 	  {
 	    _img._per_req = _img._total/3;

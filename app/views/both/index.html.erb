@@ -40,7 +40,7 @@ _img = {
 		return _img._list[ _img._now++ ];
 	},
 	_get 	: function () {
-		  _j.getJSON("http://localhost:3000/search?tag[]="+_img._tag+"&per_req="+_img._per_req+"&last="+_img._last+"&total="+_img._total+"&callback=?",function(result){
+		  _j.getJSON("http://ec2-23-21-100-80.compute-1.amazonaws.com/search?tag[]="+_img._tag+"&per_req="+_img._per_req+"&last="+_img._last+"&total="+_img._total+"&callback=?",function(result){
 		      _j.each( result , function() {
 		      _img._list[_img._count] = {
 			small : this.images[0].small.link,
