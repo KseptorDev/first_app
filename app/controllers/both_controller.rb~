@@ -7,8 +7,8 @@ class BothController < ApplicationController
     if !params['tag'].nil?
       tags 	= params['tag']
       per_req 	= params['per_req'].to_i
-      total 	= params['total'].to_i*3
-      @last 	= params['last'].to_i
+      last 	= params['last'].to_i
+      total 	= params['total'].to_i
       tagsID 	= find_tag_id(tags,total)
       linksID 	= []
       if !tagsID.empty?
@@ -18,9 +18,8 @@ class BothController < ApplicationController
 	  i +=1
 	end
       end
-      father(img_by_all_tags(total, linksID, tagsID),per_req)
+      father(img_by_all_tags(total, linksID, tagsID),last,per_req)
     end
-    @output << { :last => @last }
     respond_to do |format|
       format.html
       format.json { render :json => @output.to_json, :callback => params[:callback]}
@@ -28,6 +27,10 @@ class BothController < ApplicationController
   end
   
   def index
+    
+  end
+  
+    def auto_launch
     
   end
 end

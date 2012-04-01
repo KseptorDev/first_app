@@ -5,6 +5,7 @@ FirstApp::Application.routes.draw do
   match "gallery" => "both#index"
   get "run" => "temp#run"
   get "test" => "both#test"
+  get "form" => "both#auto_launch"
   resources :temp, :tegs, :both
 
   # The priority is based upon order of creation:

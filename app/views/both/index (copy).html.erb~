@@ -1,0 +1,30 @@
+<script type="text/javascript">
+	_modal = {
+		_el : {} ,
+		_wall : {} ,
+		_ : function() {
+			_modal._wall = _j("#wall");
+			
+			(_modal._el = _j("#modal")).click( function() {
+				_modal._el.hide();
+				_modal._wall.css( "opacity", 1 );
+			});
+		} ,
+		show : function ( _img, _width ) {
+			_modal._el.html( "<img src='"+_img+"' />").css("margin-left" , ( _width / -2 ) ).show();
+			_modal._wall.css( "opacity", 0.5 );
+		}
+	}
+
+	_j("document").ready( function(){
+		
+		_modal._();
+		
+		_j("#wall").delegate( "img" , "click" , function() {
+			if( !_wall._new.getMovement() ) {
+				var _e = $(this)
+				_modal.show( _e.retrieve("medium") );
+			}
+		});
+	});
+</script>

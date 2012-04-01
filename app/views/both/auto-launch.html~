@@ -1,0 +1,114 @@
+
+  <script src="assets/plasm-the-wall-ec4b998/Demos/assets/javascript/framework/mootools-core-1.3.2.js" type="text/javascript" charset="utf-8"></script>
+  <script src="assets/plasm-the-wall-ec4b998/Demos/assets/javascript/framework/mootools-more-1.3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script>
+var _j = $.noConflict();
+_j(document).ready(function() {	
+	launchWindow('#dialog');
+	_j('.window #close').click(function () {
+		_j('#mask').hide();
+		_j('.window').hide();
+	});		
+});
+
+function launchWindow(id) {	
+		//transition effect		
+		_j('#mask').fadeIn(1000);	
+		_j('#mask').fadeTo("slow",0.8);	
+		//transition effect
+		_j(id).fadeIn(2000); 
+}
+	_j(document).ready(function() {
+
+		/* see if anything is previously checked and reflect that in the view*/
+		_j(".checklist input:checked").parent().addClass("selected");
+
+		/* handle the user selections */
+		_j(".checklist .checkbox-select").click(
+			function(event) {
+				event.preventDefault();
+				_j(this).parent().addClass("selected");
+				_j(this).parent().find(":checkbox").attr("checked","checked");
+			}
+		);
+		_j(".checklist .checkbox-deselect").click(
+			function(event) {
+				event.preventDefault();
+				_j(this).parent().removeClass("selected");
+				_j(this).parent().find(":checkbox").removeAttr("checked");
+			}
+		);
+
+	});
+
+</script>
+
+<style>
+a {color:#333; text-decoration:none}
+a:hover {color:#ccc; text-decoration:none}
+
+#mask {
+width: 100%;
+height: 100%;
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:9000;
+  background-color:#000;
+  display:none;
+}
+  
+#boxes .window {
+  top: 20%;
+  left: 0;
+  right: 0;
+  margin-left: auto;        
+  margin-right: auto; 
+  position:fixed;
+  width:440px;
+  height:200px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes #dialog {
+  width:375px; 
+  height:203px;
+  padding:10px;
+  background-color:#ffffff;
+}
+
+</style>
+<div id="boxes">
+<div id="dialog" class="window">
+	<form name = "wall">
+		<fieldset>
+			<ul class="checklist">
+				<li>
+					<input name="_tag" value="good" type="checkbox" id="climbing"/>
+					<label for="climbing">Climbing</label>
+					<a class="checkbox-select" >Select</a>
+					<a class="checkbox-deselect" ">Cancel</a>
+				</li>
+				<li>
+					<input name="_tag" value="puppys" type="checkbox" id="puppys"/>
+					<label for="puppys">Puppys :)</label>
+					<a class="checkbox-select" >Select</a>
+					<a class="checkbox-deselect" >Cancel</a>
+				</li>
+				<li>
+					<input name="_tag" value="sea" type="checkbox" id="sea"/>
+					<label for="sea">Sea</label>
+					<a class="checkbox-select" >Select</a>
+					<a class="checkbox-deselect" >Cancel</a>
+				</li>
+			</ul>
+			<div style="clear: both;"></div>
+			<INPUT NAME="Generate" VALUE="Generate" class="sendit" TYPE=BUTTON onClick=wallData(this.wall)> 
+		</fieldset>
+	</form>
+</div>
+  <div id="mask"></div>
+</div>
+

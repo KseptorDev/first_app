@@ -6,6 +6,7 @@ class BothController < ApplicationController
   def show
     if !params['tag'].nil?
       tags 	= params['tag']
+      tags 	= tags.split(",")
       per_req 	= params['per_req'].to_i
       last 	= params['last'].to_i
       total 	= params['total'].to_i
@@ -27,6 +28,10 @@ class BothController < ApplicationController
   end
   
   def index
+    
+  end
+  
+    def auto_launch
     
   end
 end

@@ -1,0 +1,22 @@
+<script src="assets/plasm-the-wall-ec4b998/Demos/assets/javascript/framework/mootools-core-1.3.2.js" type="text/javascript" charset="utf-8"></script>
+<script src="assets/plasm-the-wall-ec4b998/Demos/assets/javascript/framework/mootools-more-1.3.2.1.js" type="text/javascript" charset="utf-8"></script>
+
+
+<style>
+div:-webkit-full-screen {
+  width: 100% !important;
+}
+div:-moz-full-screen {
+  width: 100% !important;
+}
+:-webkit-full-screen .tohide {
+  display: none; /* While in fullscreen, hide any children with class 'tohide' */
+}
+:-moz-full-screen .tohide {
+  display: none; /* While in fullscreen, hide any children with class 'tohide' */
+}
+</style>
+<script>
+div.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+div.mozRequestFullScreen();
+</script> 
