@@ -104,7 +104,7 @@ function newWall() {
 			return _img._list[ _img._now++ ];
 		},
 		_get 	: function () {
-			  var _host = "http://localhost:3000";
+			  var _host = "http://ec2-23-21-100-80.compute-1.amazonaws.com";
 			  var _req  = _img._tag+"&per_req="+_img._per_req+"&last="+_img._last+"&total="+_img._total;
 			  _j.getJSON( _host+"/search?tag="+_req+"&callback=?",function(result){
 			      _j.each( result , function() {
