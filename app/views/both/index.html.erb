@@ -39,6 +39,7 @@ newImg();
 _wall._new = _wall._temp;
 
   _j('#menu').slideUp();
+  _j('#mask').show();
   _j('.window').fadeIn(2000);
 };
 
@@ -84,6 +85,7 @@ _wall._new = _wall._temp;
 </div>
 
 <div id="viewport">
+    <div id="mask"></div>
     <div id="modal"></div>
     <div id="wall"> </div>
 </div>
@@ -155,7 +157,7 @@ function newImg() {
 		}
 	    }
 	    if(_img._tag != "") {
-	      _j('#loading').show();
+// 	      _j('#loading').show();
 	      _j('.window').fadeOut(2000);
 	      _j('#menu').slideDown();
 	      _img._per_req = 20
@@ -186,7 +188,8 @@ function newImg() {
 				};
 			    }			
 			  });
-			_wall._new.initWall();
+			 _j('#mask').fadeOut(2000);
+			 _wall._new.initWall();
 		},
 		_temp : {
 		}
