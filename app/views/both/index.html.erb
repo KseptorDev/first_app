@@ -32,9 +32,14 @@ function fullScreen() {
 };
 
 function newWall() {
+
+
+delete _img;
+newImg();
+_wall._new = _wall._temp;
+
   _j('#menu').slideUp();
   _j('.window').fadeIn(2000);
-
 };
 
 
@@ -84,12 +89,10 @@ function newWall() {
 </div>
 
 <script type="text/javascript">
-	_j(document).ready(function() {	
-		_j('#dialog').show();
-	});
-
+function newImg() {
 	_img = {
 		_list	: [],
+		_temp 	: [],
 		_now	: 0,
 		_count	: 0,
 		_tag 	: "",
@@ -119,6 +122,7 @@ function newWall() {
 			    });
 			    _img._to_load--;	
 			    if( !_img._created) {
+			      _wall._temp = _wall._new;
 			      _img._show();
 			    }
 			    else if (_img._to_load) {
@@ -137,6 +141,7 @@ function newWall() {
 			  }
 		}
 	};
+};
 	function wallData(wall)
 	{ 
 	  for (var i=0; i < document.wall._tag.length; i++) {
@@ -182,10 +187,14 @@ function newWall() {
 			    }			
 			  });
 			_wall._new.initWall();
+		},
+		_temp : {
 		}
 	};
 
 	_j(document).ready(function() {
+_j('#dialog').show();
+newImg();
 
 		/* see if anything is previously checked and reflect that in the view*/
 		_j(".checklist input:checked").parent().addClass("selected");
