@@ -29,20 +29,19 @@ function fullScreen() {
             }
         });
     };
-}
+};
 
 function newWall() {
   _j('#menu').slideUp();
   _j('.window').fadeIn(2000);
 
+};
 
-}
 
-
-</script>
+</script>	
 <div id="menu"> 
-  <button id="new-wall" class="button" onClick=newWall()>New Wall</button>
-  <button id="fullscreen" class="button" onClick=fullScreen()> FS ON/OFF</button>	
+  <button class="new-wall" onclick="newWall()"></button>
+  <button id="fullscreen" class="fullscreen" onclick="fullScreen()"></button>
 </div>
 <div id="boxes">
 <div id="dialog" class="window">
@@ -52,7 +51,7 @@ function newWall() {
 			<h1> Choose Your Tags </h1>
 			<ul class="checklist">
 				<li>
-					<input name="_tag" value="climbin" type="checkbox" id="climbing"/>
+					<input name="_tag" value="climbing" type="checkbox" id="climbing"/>
 					<label for="climbing">Climbing</label>
 					<a class="checkbox-select" >Select</a>
 					<a class="checkbox-deselect" ">Cancel</a>
@@ -73,11 +72,14 @@ function newWall() {
 			<INPUT NAME="Generate" VALUE="Generate" class="button" style="margin-top: 20px" TYPE=BUTTON onClick=wallData(this.wall)> 
 		</fieldset>
 	</form>
+
+	
 </div>
-  <div id="mask"></div>
+  <div id="loading"></div>
 </div>
 
 <div id="viewport">
+    <div id="modal"></div>
     <div id="wall"> </div>
 </div>
 
@@ -113,7 +115,6 @@ function newWall() {
 				medium: this.images[1].medium.link,
 				large : this.images[2].large.link
 			      };
-console.log(_img._list);
 			      _img._count ++;
 			    });
 			    _img._to_load--;	
@@ -131,7 +132,7 @@ console.log(_img._list);
 		},
 		_show 	: function() {
 			  if( !_img._loaded ) {
-			    _j('#mask').hide();
+			    _j('#loading').hide();
 			    _wall._new();
 			  }
 		}
@@ -149,10 +150,10 @@ console.log(_img._list);
 		}
 	    }
 	    if(_img._tag != "") {
-	      _j('#mask').show();
+	      _j('#loading').show();
 	      _j('.window').fadeOut(2000);
 	      _j('#menu').slideDown();
-	      _img._per_req = _img._total/_img._to_load;
+	      _img._per_req = 20
 	      _img._get ();
 	    }
 	};
@@ -182,7 +183,7 @@ console.log(_img._list);
 			  });
 			_wall._new.initWall();
 		}
-	}
+	};
 
 	_j(document).ready(function() {
 
@@ -204,6 +205,30 @@ console.log(_img._list);
 				_j(this).parent().find(":checkbox").removeAttr("checked");
 			}
 		);
+
+		_j("#wall").delegate( "img" , "click" , function() {
+			if( !_wall._new.getMovement() ) {
+				var _e = $(this)
+				_modal.show( _e.retrieve("medium") );
+			}
+		});
+
+	});
+
+
+	_modal = {
+		  show : function (_img){
+			  _j('#modal').html('<img src="'+_img+'" onClick="_modal.close();"/>').show();
+			  _j('#wall').css("opacity", 0.5);
+		  },
+		  close : function (){
+			_j('#modal').click( function() {
+				_j('#modal').hide();
+				_j('#wall').css("opacity", 1);
+			});
+		  }
+	}
+	_j("document").ready( function(){
 
 	});
 </script>

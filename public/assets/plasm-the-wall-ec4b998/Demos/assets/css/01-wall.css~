@@ -1,52 +1,78 @@
-/* Viewport */
+
 #viewport{
-    width:100%;
-    height:100%;
-    position:relative;
-    overflow:hidden;
-    margin:0 auto;
-    background:#111111;
+	width:100%;
+	height:100%;
+	position:relative;
+	overflow:hidden;
+	margin:0 auto;
+	z-index: 0;
+	background-color:#111111;
 }
-/* Wall */
 #wall{
-    z-index:0;
+	z-index:0;
 }
-    /* Tile Wall create */
 #wall .tile{
-    color:#FFFFFF;
-    text-align:center;
-    line-height:245px;
+	color:#FFFFFF;
+	text-align:center;
+	line-height:245px;
 }
 
 #wall div {
-/*	    background: transparent url(media/loading.gif) no-repeat center center;*/
-	    padding: 5px;
+	padding: 5px;
+}
+
+#menu{
+	opacity: 0.9;
+	display:none;
+	width : relative;
+	height : relative;
+	left: 85%;
+	position:fixed;
+	background-color: #878787;
+	z-index:9999;
+	padding:2px ;
+	-moz-border-radius: 0px 0px 5px 5px;
+	border-radius: 0px 0px 5px 5px;
 }
 #modal {
-    background: black;
-	    border: 3px solid #878787;
-	    border-radius: 6px;
-	    position: fixed;
-	    top: 20px;
-	    left: 50%;
-	    z-index: 10000;
-	    display: none;
-	    margin-left: -306px;
+	opacity: 1;
+	margin-top: 20%;
+	background-color: black;
+	display: none;
+	left: 0;
+	right: 0;
+	margin-left: auto;        
+	margin-right: auto; 
+	position:fixed;
+	width : 640px;
+	height : 427px;
+	border: 3px solid #878787;
+	border-radius: 6px;
+	z-index: 1;
 }
-#menu{
-width : relative;
-height : relative;
-  left: 80%;
-  position:fixed;
-  background-color: white;
-  z-index:9999;
-  padding:2px ;
-  -moz-border-radius: 0px 0px 5px 5px;
-  border-radius: 0px 0px 5px 5px;
+.new-wall {
+    border: 0pt none; 
+    padding: 0pt; 
+    background: url(media/loop_24x24.png) no-repeat scroll center center transparent; 
+    width: 24px; 
+    height: 24px; 
+    opacity: 0.9; 
+    margin: 5px;
+}
+.fullscreen {
+    border: 0pt none; 
+    padding: 0pt; 
+    background: url(media/fullscreen_24x24.png) no-repeat scroll center center transparent; 
+    width: 24px; 
+    height: 24px; 
+    opacity: 0.9;
+    margin: 5px; 
+
+
 }
 .button {
-      position: relative; /*or absolute*/
-    z-index: 1;
+	position: relative;
+	z-index: 1;
 	background-color:#3399CC;
 	-moz-border-radius:6px;
 	-webkit-border-radius:6px;
@@ -123,44 +149,42 @@ a.checkbox-deselect {
 	padding: 8px;
 }
 
-#mask {
-  width: 100%;
-  height: 100%;
-  position:absolute;
-  left:0;
-  top:0;
-  z-index:9000;
-  background: transparent url(media/loading.gif) no-repeat center center;
-  display:none;
+#loading {
+	width: 100%;
+	height: 100%;
+	position:absolute;
+	z-index:1;
+	background: transparent url(media/loading.gif) no-repeat center center;
+	display:none;
 }
   
 #boxes .window {
-  top: 20%;
-  left: 0;
-  right: 0;
-  margin-left: auto;        
-  margin-right: auto; 
-  position:fixed;
-  display:none;
-  z-index:9999;
-  padding:20px;
-  -moz-border-radius: 25px 25px 75px 25px;
-  border-radius: 25px 25px 75px 25px;
+	top: 20%;
+	left: 0;
+	right: 0;
+	margin-left: auto;        
+	margin-right: auto; 
+	position:fixed;
+	display:none;
+	z-index:9999;
+	padding:20px;
+	-moz-border-radius: 25px 25px 75px 25px;
+	border-radius: 25px 25px 75px 25px;
 }
 
 #boxes #dialog {
-  width:350px; 
-  height:280px;
-  padding:10px;
-  background-color:#ffffff;
-  display: block;
-  padding: 10px 10px 0px 20px;
+	width:350px; 
+	height:280px;
+	padding:10px;
+	background-color:#ffffff;
+	display: block;
+	padding: 10px 10px 0px 20px;
 }
 
 #boxes  h1 {
-    margin-bottom: 0;
-    margin-right: 0;
-    margin-top: 0;
-    padding-bottom: 15px;
-    padding-top: 5px;
+	margin-bottom: 0;
+	margin-right: 0;
+	margin-top: 0;
+	padding-bottom: 15px;
+	padding-top: 5px;
 }
