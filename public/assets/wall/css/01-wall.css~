@@ -11,18 +11,9 @@
 #wall{
 	z-index:0;
 }
-#wall .tile{
-	color:#FFFFFF;
-	text-align:center;
-	line-height:245px;
-}
-
-#wall div {
-	padding: 5px;
-}
 
 #menu{
-	opacity: 0.9;
+	opacity: 0.7;
 	display:none;
 	width : relative;
 	height : relative;
@@ -35,12 +26,13 @@
 	border-radius: 0px 0px 5px 5px;
 }
 #mask {
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  position:fixed;
-  opacity: 0.9;
-  z-index:1;
+	display:none;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	position:fixed;
+	opacity: 0.9;
+	z-index:1;
   
 }
 #modal {
@@ -54,28 +46,28 @@
 	margin-right: auto; 
 	position:fixed;
 	width : 640px;
-	height : 427px;
+	height : 	427px;
 	border: 3px solid #878787;
 	border-radius: 6px;
 	z-index: 1;
 }
 .new-wall {
-    border: 0pt none; 
-    padding: 0pt; 
-    background: url(media/loop_24x24.png) no-repeat scroll center center transparent; 
-    width: 24px; 
-    height: 24px; 
-    opacity: 0.9; 
-    margin: 5px;
+	border: 0pt none; 
+	padding: 0pt; 
+	background: url(media/loop_24x24.png) no-repeat scroll center center transparent; 
+	width: 24px; 
+	height: 24px; 
+	opacity: 0.9; 
+	margin: 5px;
 }
 .fullscreen {
-    border: 0pt none; 
-    padding: 0pt; 
-    background: url(media/fullscreen_24x24.png) no-repeat scroll center center transparent; 
-    width: 24px; 
-    height: 24px; 
-    opacity: 0.9;
-    margin: 5px; 
+	border: 0pt none; 
+	padding: 0pt; 
+	background: url(media/fullscreen_24x24.png) no-repeat scroll center center transparent; 
+	width: 24px; 
+	height: 24px; 
+	opacity: 0.9;
+	margin: 5px; 
 
 
 }
@@ -167,7 +159,7 @@ a.checkbox-deselect {
 	display:none;
 }
   
-#boxes .window {
+#form .window {
 	top: 20%;
 	left: 0;
 	right: 0;
@@ -181,7 +173,7 @@ a.checkbox-deselect {
 	border-radius: 25px 25px 75px 25px;
 }
 
-#boxes #dialog {
+#form #dialog {
 	width:350px; 
 	height:280px;
 	padding:10px;
@@ -190,10 +182,16 @@ a.checkbox-deselect {
 	padding: 10px 10px 0px 20px;
 }
 
-#boxes  h1 {
+#form  h1 {
+  font-family: cursive, Times, serif;
+	font-size: 20px;
 	margin-bottom: 0;
 	margin-right: 0;
 	margin-top: 0;
 	padding-bottom: 15px;
 	padding-top: 5px;
+}
+#form label {
+  font-family: cursive, Times, serif;
+  font-size: 10px;
 }

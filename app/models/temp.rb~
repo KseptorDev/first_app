@@ -1,9 +1,10 @@
 class Temp < ActiveRecord::Base
-  mount_uploader :image, ImageUploader
-  
-#   attr_accessible :link, :tags, :image_name
-#   validates :link, :presence => true
-#   validates :tags, :presence => true
-#   validates_format_of :tags, :with => /^[a-zA-Z,]*$/
+  attr_accessible :link, :tags, :image_name
+  # validates link not empty
+  validates :link, :presence => true
+  # validates tags not empty
+  validates :tags, :presence => true
+  # validates tags only words, without space
+  validates_format_of :tags, :with => /^[a-zA-Z,]*$/
 				
 end

@@ -1,11 +1,11 @@
 <script>
 var _j = $.noConflict();
 </script>
-<link rel="stylesheet" href="assets/plasm-the-wall-ec4b998/Demos/assets/css/default.css" />
-<link rel="stylesheet" href="assets/plasm-the-wall-ec4b998/Demos/assets/css/01-wall.css"  />
-<script src="assets/plasm-the-wall-ec4b998/Demos/assets/javascript/framework/mootools-core-1.3.2.js" type="text/javascript" charset="utf-8"></script>
-<script src="assets/plasm-the-wall-ec4b998/Demos/assets/javascript/framework/mootools-more-1.3.2.1.js" type="text/javascript" charset="utf-8"></script>
-<script src="assets/plasm-the-wall-ec4b998/Source/wall.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="assets/wall/css/default.css" />
+<link rel="stylesheet" href="assets/wall/css/01-wall.css"  />
+<script src="assets/wall/javascript/framework/mootools-core-1.3.2.js" type="text/javascript" charset="utf-8"></script>
+<script src="assets/wall/javascript/framework/mootools-more-1.3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script src="assets/wall/Source/wall.js" type="text/javascript" charset="utf-8"></script>
 
 <div id="menu"> 
   <button class="new-wall" onclick="newWall()"></button>
@@ -13,7 +13,7 @@ var _j = $.noConflict();
 </div>
 
 <div id="form">
-  <div id="dialog">
+  <div id="dialog" class="window">
     <form name = "wall" id="form">
       <fieldset>
 	<h1> Choose Your Tags </h1>

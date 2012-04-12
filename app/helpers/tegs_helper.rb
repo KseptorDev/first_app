@@ -1,17 +1,18 @@
 module TegsHelper
-   
+  # Adds tags and returns ID
   def add_tag_return_IDs(tag)
     tags = tag.split(",").collect{|x| x.strip}
     i = 0
-    @IDs = []
+    iDs = []
     while  i < tags.count  do
+      # Checks if the tag does not exist
       if Teg.find_by_teg(tags[i]).nil?
 	Teg.new(:teg => tags[i]).save
       end
-      @IDs << Teg.find_by_teg(tags[i]).id
+      iDs << Teg.find_by_teg(tags[i]).id
       i +=1
     end
-    return @IDs
+    return iDs
   end
   
 end

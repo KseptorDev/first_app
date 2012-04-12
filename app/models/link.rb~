@@ -1,2 +1,5 @@
 class Link < ActiveRecord::Base
+  # Activate the uploader
+  mount_uploader :image, ImageUploader
+  
 end
