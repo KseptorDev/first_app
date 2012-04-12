@@ -61,6 +61,7 @@
 	margin: 5px;
 }
 .fullscreen {
+  display: inline;
 	border: 0pt none; 
 	padding: 0pt; 
 	background: url(media/fullscreen_24x24.png) no-repeat scroll center center transparent; 
@@ -68,8 +69,17 @@
 	height: 24px; 
 	opacity: 0.9;
 	margin: 5px; 
+}
 
-
+.fullscreen_exit {
+    display: inline;
+	border: 0pt none; 
+	padding: 0pt; 
+	background: url(media/fullscreen_exit_24x24.png) no-repeat scroll center center transparent; 
+	width: 24px; 
+	height: 24px; 
+	opacity: 0.9;
+	margin: 5px; 
 }
 .button {
 	position: relative;
@@ -193,5 +203,5 @@ a.checkbox-deselect {
 }
 #form label {
   font-family: cursive, Times, serif;
-  font-size: 10px;
+  font-size: 15px;
 }

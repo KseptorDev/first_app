@@ -9,9 +9,12 @@ var _j = $.noConflict();
 
 <div id="menu"> 
   <button class="new-wall" onclick="newWall()"></button>
-  <button id="fullscreen" class="fullscreen" onclick="fullScreen()"></button>
+  <button id="fullscreen_off" class="fullscreen_exit" onclick="fullScreen_off()"></button>
+  <button id="fullscreen_on" class="fullscreen" onclick="fullScreen_on()"></button>
+
 </div>
 
+<!-- Form for the tag selection -->
 <div id="form">
   <div id="dialog" class="window">
     <form name = "wall" id="form">
@@ -22,7 +25,7 @@ var _j = $.noConflict();
 	    <input name="_tag" value="climbing" type="checkbox" id="climbing"/>
 	    <label for="climbing">Climbing</label>
 	    <a class="checkbox-select" >Select</a>
-	    <a class="checkbox-deselect" ">Cancel</a>
+	    <a class="checkbox-deselect" >Cancel</a>
 	  </li>
 	  <li>
 	    <input name="_tag" value="puppies" type="checkbox" id="puppys"/>
@@ -57,10 +60,10 @@ var _j = $.noConflict();
 	_j('#dialog').show();
 	newImg();
 
-		/* see if anything is previously checked and reflect that in the view*/
+		// See if anything is previously checked and reflect that in the view
 		_j(".checklist input:checked").parent().addClass("selected");
 
-		/* handle the user selections */
+		// Handle the user selections - select
 		_j(".checklist .checkbox-select").click(
 			function(event) {
 				event.preventDefault();
@@ -68,6 +71,7 @@ var _j = $.noConflict();
 				_j(this).parent().find(":checkbox").attr("checked","checked");
 			}
 		);
+		// Handle the user selections - deselect
 		_j(".checklist .checkbox-deselect").click(
 			function(event) {
 				event.preventDefault();
@@ -75,7 +79,7 @@ var _j = $.noConflict();
 				_j(this).parent().find(":checkbox").removeAttr("checked");
 			}
 		);
-
+		// On click on image - open modal with the image
 		_j("#wall").delegate( "img" , "click" , function() {
 			if( !_wall._new.getMovement() ) {
 				var _e = $(this)
@@ -84,12 +88,14 @@ var _j = $.noConflict();
 		});
 
 	});
-
+	// The modal 
 	_modal = {
+		  // The show function that shows the medium image
 		  show : function (_img){
 			_j('#modal').html('<img src="'+_img+'" onClick="_modal.close();"/>').show();
 			_j('#wall').css("opacity", 0.5);
 		  },
+		  // The hide function that hides the medium image	  
 		  close : function (){
 			_j('#modal').click( function() {
 				_j('#modal').hide();
@@ -97,31 +103,32 @@ var _j = $.noConflict();
 			});
 		  }
 	};
-
+	
 	function newImg() {
+		// Image object
 		_img = {
-		  _list		: [],
-		  _now		: 0,
-		  _count	: 0,
-		  _tag 		: "",
-		  _total	: 60,
-		  _per_req	: 0,
-		  _last 	: 0,
-		  _loaded 	: 0,
-		  _created	: 0,
-		  _to_load	: 3,
-		  _next	: function( ) {
+		  _list		: [],	/*The array of images*/
+		  _now		: 0,  	/*Image now - the place, of an image, in the array*/
+		  _count	: 0,  	/*Image counter*/
+		  _tag 		: "", 	/*The tag/s*/
+		  _total	: 3,	/*Total images to be loaded*/
+		  _per_req	: 0,  	/*Images to be loaded per request*/
+		  _last 	: 0, 	/*Last image that was loaded in the last request - default 0*/ 
+		  _created	: false,/*If the wall was loaded once*/
+		  _to_load	: 3,	/*Number of request to be loaded*/
+		  _next	: function( ) { /*Next image to load in the wall*/
 			  if( _img._now >= _img._count ) {
 				  _img._now = 0;
 			  }
 			  return _img._list[ _img._now++ ];
 		  },
-		  _get 	: function () {
+		  _get 	: function () { /*Get request and creation of the images array*/
 			    var _host = "http://ec2-23-21-100-80.compute-1.amazonaws.com";
 			    var _req  = _img._tag+"&per_req="+_img._per_req+"&last="+_img._last+"&total="+_img._total;
 			    _j.getJSON( _host+"/search?tag="+_req+"&callback=?",function(result){
 				_j.each( result , function() {
-				_img._list[_img._count] = {
+				// Creating an array of images with: small, medium and large sizes
+				_img._list[_img._count] = { 
 				  small : this.images[0].small.link,
 				  medium: this.images[1].medium.link,
 				  large : this.images[2].large.link
@@ -129,6 +136,7 @@ var _j = $.noConflict();
 				_img._count ++;
 			      });
 			      _img._to_load--;	
+			      // If the wall was not loaded - load it, else - ask more images
 			      if( !_img._created) {
 				_wall._temp = _wall._new;
 				_img._show();
@@ -142,47 +150,44 @@ var _j = $.noConflict();
 			    _img._last = _img._count;
 			    _img._get ();
 		  },
-		  _show 	: function() {
-			    if( !_img._loaded ) {
-			      _j('#loading').hide();
-			      _wall._new();
-			    }
+		  // Loads the wall
+		  _show	  : function() {
+			    _j('#loading').hide();
+			    _wall._new();
 		  }
 		};
 	};
-
+	// Wall object
 	_wall = {
 		_new : function() {
 		    _wall._new = new Wall("wall", 
 		      {
-			"draggable":true,
-			"inertia":true,
+			"draggable":true, 		/*Enables drag*/
+			"inertia":true,			/*Enables inertia*/
 			"width":245, 
 			"height":165, 
-			"rangex":[-100,100], 
-			"rangey":[-100,100],
-			callOnUpdate: function(items){
+			"rangex":[-100,100], 		/*Defines the number of columns (not pixel)*/
+			"rangey":[-100,100],		/*Defines the number of lines (not pixel)*/
+			callOnUpdate: function(items){ 	/*Action when drag is completed*/
 			  items.each(function(e, i){
 			  var _i = _img._next();
-			  var a = new Element("img[src="+_i.small+"]");
+			  var a = new Element("img[src="+_i.small+"]"); 	/*Load elements to the wall*/
 			  a.store( "medium" , _i.medium ).inject(e.node).fade("hide").fade("in");
 			  });
 			  if(!_img._created)
 			    {
-			    _img._created -- ;
+			    _img._created = true ;
 			    _img._params();
 			    };
 			}			
 		      });
 		      _j('#mask').fadeOut(2000);
-		      _wall._new.initWall();
+		      _wall._new.initWall(); 		/*Initialize The Wall building.*/
 		},
-		_temp : {
-		}
+		_temp : {}
 	};
-
-	function wallData(wall)
-	{ 
+	// Gets parameters(tags) from the checkbox
+	function wallData(wall) { 
 	      for (var i=0; i < document.wall._tag.length; i++) {
 		if (document.wall._tag[i].checked){
 		      if(_img._tag == "" && document.wall._tag[i].value) {
@@ -194,14 +199,14 @@ var _j = $.noConflict();
 		    }
 		}
 		if(_img._tag != "") {
-    	      _j('#loading').show();
+		  _j('#loading').show();
 		  _j('.window').fadeOut(2000);
 		  _j('#menu').slideDown();
-		  _img._per_req = 20
+		  _img._per_req = _img._total / _img._to_load;
 		  _img._get ();
 		}
 	};
-
+	// When clicked on "new wall" - resets all parameters
 	function newWall() {
 		delete _img;
 		newImg();
@@ -210,22 +215,30 @@ var _j = $.noConflict();
 		_j('#mask').show();
 		_j('.window').fadeIn(2000);
 	};
+	// FullScreen controller - on/off
+	function fullScreen_on() {
 
-	function fullScreen() {
-		var viewFullScreen = document.getElementById("fullscreen");
+		var viewFullScreen = document.getElementById("fullscreen_on");
 		if (viewFullScreen) {
 		    viewFullScreen.addEventListener("click", function () {
 			var docElm = document.documentElement;
 			if (docElm.webkitRequestFullScreen) {
-			    docElm.webkitRequestFullScreen();	    
+			    docElm.webkitRequestFullScreen();	
+_j('.fullscreen').hide();
+		_j('.fullscreen_exit').show();	    
 			}
 		    });
 		};
-		var cancelFullScreen = document.getElementById("fullscreen");
+}
+	function fullScreen_off(){
+		var cancelFullScreen = document.getElementById("fullscreen_off");
 		if (cancelFullScreen) {
 		    cancelFullScreen.addEventListener("click", function () {
 			if (document.webkitCancelFullScreen) {
 			    document.webkitCancelFullScreen();
+
+		_j('.fullscreen_exit').hide();	
+_j('.fullscreen').show();
 			}
 		    });
 		};
