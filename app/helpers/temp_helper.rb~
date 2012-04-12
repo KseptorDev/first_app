@@ -15,7 +15,6 @@ module TempHelper
 	  Temp.first.delete
 	  return true
 	end
-	Temp.first.delete
 	return false
       end
       return false
@@ -56,7 +55,7 @@ module TempHelper
 
   # Checks again the file type, after download. If not image - delete link
   def server_file_type(path)
-  content_type = `file --raw --brief "#{path}"`.chomp
+  content_type = `file --raw --brief "#{path, r=ISO-8859-1}"`.chomp
     if content_type.match(/image|png|jpg|jpeg|gif/)
       return true
     else

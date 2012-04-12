@@ -14,10 +14,8 @@ module TempHelper
 	  File.delete("public/images/original/#{@original_image_name}")
 	  Temp.first.delete
 	  return true
-	else
-	  Temp.first.delete
-	  return false
 	end
+	return false
       end
       return false
     end

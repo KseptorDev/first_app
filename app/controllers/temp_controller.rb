@@ -30,4 +30,12 @@ class TempController < ApplicationController
   def run
     create_images
   end
+  
+  def destroy
+    @req = Temp.find(params[:id])
+    @req.delete
+    respond_to do |format|
+      format.html { redirect_to index_path }
+    end
+  end
 end

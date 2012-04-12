@@ -4,4 +4,5 @@ FirstApp::Application.routes.draw do
   get 	"search" => "both#wall", :format=>false, :defaults=>{:format=>'json'}
   match "index"  => "temp#index"
   get 	"run"	 => "temp#run"
+  resources :temp
 end
