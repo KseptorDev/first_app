@@ -224,8 +224,8 @@ var _j = $.noConflict();
 			var docElm = document.documentElement;
 			if (docElm.webkitRequestFullScreen) {
 			    docElm.webkitRequestFullScreen();	
-_j('.fullscreen').hide();
-		_j('.fullscreen_exit').show();	    
+			    _j('.fullscreen').hide();
+			    _j('.fullscreen_exit').show();	    
 			}
 		    });
 		};
@@ -236,9 +236,8 @@ _j('.fullscreen').hide();
 		    cancelFullScreen.addEventListener("click", function () {
 			if (document.webkitCancelFullScreen) {
 			    document.webkitCancelFullScreen();
-
-		_j('.fullscreen_exit').hide();	
-_j('.fullscreen').show();
+			    _j('.fullscreen_exit').hide();	
+			    _j('.fullscreen').show();
 			}
 		    });
 		};
