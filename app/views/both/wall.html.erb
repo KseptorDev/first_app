@@ -123,7 +123,7 @@ var _j = $.noConflict();
 			  return _img._list[ _img._now++ ];
 		  },
 		  _get 	: function () { /*Get request and creation of the images array*/
-			    var _host = "http://ec2-23-21-100-80.compute-1.amazonaws.com";
+			    var _host = "http://ec2-107-20-228-241.compute-1.amazonaws.com/";
 			    var _req  = _img._tag+"&per_req="+_img._per_req+"&last="+_img._last+"&total="+_img._total;
 			    _j.getJSON( _host+"/search?tag="+_req+"&callback=?",function(result){
 				_j.each( result , function() {
